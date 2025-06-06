@@ -200,7 +200,7 @@ export default function Analytics() {
                         type="category"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: '#64748b' }}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
@@ -209,8 +209,8 @@ export default function Analytics() {
                         type="number"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: '#64748b' }}
-                        domain={['dataMin', 'dataMax']}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        domain={["dataMin", "dataMax"]}
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
@@ -235,7 +235,7 @@ export default function Analytics() {
                         type="category"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: '#64748b' }}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
@@ -244,12 +244,11 @@ export default function Analytics() {
                         type="number"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: '#64748b' }}
-                        domain={['dataMin', 'dataMax']}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        domain={["dataMin", "dataMax"]}
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
-                      />
                       />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -274,7 +273,7 @@ export default function Analytics() {
                       type="category"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fontSize: 12, fill: '#64748b' }}
+                      tick={{ fontSize: 12, fill: "#64748b" }}
                       allowDataOverflow={false}
                       allowDecimals={true}
                       allowDuplicatedCategory={true}
@@ -283,12 +282,11 @@ export default function Analytics() {
                       type="number"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fontSize: 12, fill: '#64748b' }}
-                      domain={['dataMin', 'dataMax']}
+                      tick={{ fontSize: 12, fill: "#64748b" }}
+                      domain={["dataMin", "dataMax"]}
                       allowDataOverflow={false}
                       allowDecimals={true}
                       allowDuplicatedCategory={true}
-                    />
                     />
                     <Tooltip />
                     <Legend />
