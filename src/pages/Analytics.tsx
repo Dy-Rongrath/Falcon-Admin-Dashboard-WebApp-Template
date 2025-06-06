@@ -195,8 +195,20 @@ export default function Analytics() {
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={websiteTrafficData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
+                      <XAxis
+                        dataKey="month"
+                        type="category"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
+                      />
+                      <YAxis
+                        type="number"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        domain={["dataMin", "dataMax"]}
+                      />
                       <Tooltip />
                       <Line
                         type="monotone"
@@ -220,8 +232,20 @@ export default function Analytics() {
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={websiteTrafficData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
+                      <XAxis
+                        dataKey="month"
+                        type="category"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
+                      />
+                      <YAxis
+                        type="number"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        domain={["dataMin", "dataMax"]}
+                      />
                       <Tooltip />
                       <Area
                         type="monotone"
@@ -248,8 +272,20 @@ export default function Analytics() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={revenueData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="month" />
-                    <YAxis />
+                    <XAxis
+                      dataKey="month"
+                      type="category"
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fontSize: 12, fill: "#64748b" }}
+                    />
+                    <YAxis
+                      type="number"
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fontSize: 12, fill: "#64748b" }}
+                      domain={["dataMin", "dataMax"]}
+                    />
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="revenue" fill="#3b82f6" name="Revenue" />

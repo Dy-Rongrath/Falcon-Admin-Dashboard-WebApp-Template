@@ -46,12 +46,17 @@ export default function SalesChart() {
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: "#64748b" }}
+                tick={{ fontSize: 12, fill: '#64748b' }}
+                type="category"
+                interval="preserveStartEnd"
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: "#64748b" }}
+                tick={{ fontSize: 12, fill: '#64748b' }}
+                type="number"
+                domain={['dataMin', 'dataMax']}
+              />
               />
               <Tooltip
                 contentStyle={{
