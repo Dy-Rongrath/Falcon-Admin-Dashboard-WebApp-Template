@@ -3,10 +3,31 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SideNavigation from "@/components/SideNavigation";
+import TopNavigationBar from "@/components/TopNavigationBar";
+import CustomizeButton from "@/components/CustomizeButton";
+
+// Pages
 import Index from "./pages/Index";
+import Products from "./pages/ecommerce/Products";
+import Orders from "./pages/ecommerce/Orders";
+import UserManagement from "./pages/UserManagement";
+import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+// Layout component for pages with sidebar
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
+  <div className="min-h-screen bg-slate-50 flex">
+    <SideNavigation />
+    <div className="flex-1 ml-64">
+      <TopNavigationBar />
+      <main className="p-6">{children}</main>
+    </div>
+    <CustomizeButton />
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -16,6 +37,38 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route
+            path="/ecommerce/products"
+            element={
+              <DashboardLayout>
+                <Products />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/orders"
+            element={
+              <DashboardLayout>
+                <Orders />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <DashboardLayout>
+                <UserManagement />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              <DashboardLayout>
+                <Analytics />
+              </DashboardLayout>
+            }
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

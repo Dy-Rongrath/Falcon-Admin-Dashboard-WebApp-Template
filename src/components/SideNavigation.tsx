@@ -22,54 +22,54 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   badge?: string;
   children?: NavItem[];
-  active?: boolean;
+  path?: string;
 }
 
 const navigationItems: NavItem[] = [
-  { icon: Home, label: "Dashboard", active: true },
+  { icon: Home, label: "Dashboard", path: "/" },
   {
     icon: ShoppingCart,
     label: "E commerce",
     children: [
-      { icon: Package, label: "Product" },
-      { icon: ShoppingCart, label: "Orders" },
-      { icon: Users, label: "Customers" },
+      { icon: Package, label: "Products", path: "/ecommerce/products" },
+      { icon: ShoppingCart, label: "Orders", path: "/ecommerce/orders" },
+      { icon: Users, label: "Customers", path: "/ecommerce/customers" },
     ],
   },
-  { icon: Users, label: "User management" },
+  { icon: Users, label: "User management", path: "/users" },
   {
     icon: BarChart3,
     label: "Analytics",
-    children: [
-      { icon: BarChart3, label: "Reports" },
-      { icon: BarChart3, label: "Statistics" },
-    ],
+    path: "/analytics",
   },
-  { icon: Package, label: "Product", badge: "New" },
-  { icon: Mail, label: "Email", badge: "6" },
-  { icon: Calendar, label: "Events" },
-  { icon: FileText, label: "Kanban" },
+  { icon: Package, label: "Product", badge: "New", path: "/products" },
+  { icon: Mail, label: "Email", badge: "6", path: "/email" },
+  { icon: Calendar, label: "Events", path: "/events" },
+  { icon: FileText, label: "Kanban", path: "/kanban" },
   {
     icon: Briefcase,
     label: "Support desk",
     children: [
-      { icon: Bell, label: "Tickets" },
-      { icon: Users, label: "Agents" },
+      { icon: Bell, label: "Tickets", path: "/support/tickets" },
+      { icon: Users, label: "Agents", path: "/support/agents" },
     ],
   },
-  { icon: Settings, label: "Settings" },
-  { icon: Shield, label: "Authentication" },
-  { icon: Zap, label: "Utilities" },
+  { icon: Settings, label: "Settings", path: "/settings" },
+  { icon: Shield, label: "Authentication", path: "/auth" },
+  { icon: Zap, label: "Utilities", path: "/utilities" },
 ];
 
 export default function SideNavigation() {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleExpanded = (label: string) => {
     setExpandedItems((prev) =>
@@ -79,9 +79,31 @@ export default function SideNavigation() {
     );
   };
 
+  const isActive = (path?: string) => {
+    if (!path) return false;
+    return location.pathname === path;
+  };
+
+  const isParentActive = (item: NavItem) => {
+    if (item.path && isActive(item.path)) return true;
+    if (item.children) {
+      return item.children.some((child) => isActive(child.path));
+    }
+    return false;
+  };
+
   const renderNavItem = (item: NavItem, level = 0) => {
     const hasChildren = item.children && item.children.length > 0;
     const isExpanded = expandedItems.includes(item.label);
+    const itemIsActive = isActive(item.path) || isParentActive(item);
+
+    const handleClick = () => {
+      if (hasChildren) {
+        toggleExpanded(item.label);
+      } else if (item.path) {
+        navigate(item.path);
+      }
+    };
 
     return (
       <div key={item.label}>
@@ -90,14 +112,14 @@ export default function SideNavigation() {
           className={cn(
             "w-full justify-start gap-3 h-10 px-3 text-sm font-medium transition-colors",
             level > 0 && "ml-6 w-[calc(100%-24px)]",
-            item.active
+            itemIsActive
               ? "bg-blue-50 text-blue-600 hover:bg-blue-50 hover:text-blue-600"
               : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
           )}
-          onClick={() => hasChildren && toggleExpanded(item.label)}
+          onClick={handleClick}
         >
           <item.icon
-            className={cn("h-4 w-4 shrink-0", item.active && "text-blue-600")}
+            className={cn("h-4 w-4 shrink-0", itemIsActive && "text-blue-600")}
           />
           <span className="flex-1 text-left">{item.label}</span>
           {item.badge && (
@@ -133,7 +155,10 @@ export default function SideNavigation() {
     <div className="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-slate-200">
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">F</span>
           </div>
