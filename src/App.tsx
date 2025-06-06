@@ -25,6 +25,8 @@ import Utilities from "./pages/Utilities";
 import FileManager from "./pages/FileManager";
 import Chat from "./pages/Chat";
 import Invoices from "./pages/Invoices";
+import Profile from "./pages/Profile";
+import Components from "./pages/Components";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -174,6 +176,22 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Invoices />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <DashboardLayout>
+                <Profile />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/components"
+            element={
+              <DashboardLayout>
+                <Components />
               </DashboardLayout>
             }
           />

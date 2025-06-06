@@ -23,6 +23,8 @@ import {
   MessageSquare,
   File,
   CreditCard,
+  User,
+  Palette,
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -59,6 +61,7 @@ const navigationItems: NavItem[] = [
   { icon: MessageSquare, label: "Chat", path: "/chat" },
   { icon: File, label: "Files", path: "/files" },
   { icon: CreditCard, label: "Invoices", path: "/invoices" },
+  { icon: User, label: "Profile", path: "/profile" },
   {
     icon: Briefcase,
     label: "Support desk",
@@ -67,6 +70,7 @@ const navigationItems: NavItem[] = [
       { icon: Users, label: "Agents", path: "/support/agents" },
     ],
   },
+  { icon: Palette, label: "Components", path: "/components" },
   { icon: Settings, label: "Settings", path: "/settings" },
   { icon: Shield, label: "Authentication", path: "/auth" },
   { icon: Zap, label: "Utilities", path: "/utilities" },
