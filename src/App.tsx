@@ -11,6 +11,7 @@ import CustomizeButton from "@/components/CustomizeButton";
 import Index from "./pages/Index";
 import Products from "./pages/ecommerce/Products";
 import Orders from "./pages/ecommerce/Orders";
+import Customers from "./pages/ecommerce/Customers";
 import UserManagement from "./pages/UserManagement";
 import Analytics from "./pages/Analytics";
 import Email from "./pages/Email";
@@ -53,6 +54,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Orders />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/customers"
+            element={
+              <DashboardLayout>
+                <Customers />
               </DashboardLayout>
             }
           />
