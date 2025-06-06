@@ -18,6 +18,10 @@ import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
 import Settings from "./pages/Settings";
 import StandaloneProducts from "./pages/Products";
+import Events from "./pages/Events";
+import SupportDesk from "./pages/support/SupportDesk";
+import Authentication from "./pages/Authentication";
+import Utilities from "./pages/Utilities";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -111,6 +115,38 @@ const App = () => (
             element={
               <DashboardLayout>
                 <StandaloneProducts />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/events"
+            element={
+              <DashboardLayout>
+                <Events />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/tickets"
+            element={
+              <DashboardLayout>
+                <SupportDesk />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/auth"
+            element={
+              <DashboardLayout>
+                <Authentication />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/utilities"
+            element={
+              <DashboardLayout>
+                <Utilities />
               </DashboardLayout>
             }
           />
