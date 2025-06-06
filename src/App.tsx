@@ -27,6 +27,9 @@ import Chat from "./pages/Chat";
 import Invoices from "./pages/Invoices";
 import Profile from "./pages/Profile";
 import Components from "./pages/Components";
+import Notifications from "./pages/Notifications";
+import Calendar from "./pages/Calendar";
+import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -192,6 +195,30 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Components />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <DashboardLayout>
+                <Notifications />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              <DashboardLayout>
+                <Calendar />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              <DashboardLayout>
+                <Reports />
               </DashboardLayout>
             }
           />

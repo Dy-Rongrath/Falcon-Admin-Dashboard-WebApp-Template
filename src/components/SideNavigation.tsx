@@ -61,6 +61,9 @@ const navigationItems: NavItem[] = [
   { icon: MessageSquare, label: "Chat", path: "/chat" },
   { icon: File, label: "Files", path: "/files" },
   { icon: CreditCard, label: "Invoices", path: "/invoices" },
+  { icon: Bell, label: "Notifications", badge: "3", path: "/notifications" },
+  { icon: Calendar, label: "Calendar", path: "/calendar" },
+  { icon: FileText, label: "Reports", path: "/reports" },
   { icon: User, label: "Profile", path: "/profile" },
   {
     icon: Briefcase,
