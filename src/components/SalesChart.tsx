@@ -40,38 +40,62 @@ export default function SalesChart() {
       <CardContent>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <LineChart
+              data={data}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              reverseStackOrder={false}
+            >
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#e2e8f0"
+                horizontal={true}
+                vertical={true}
+              />
               <XAxis
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: "#64748b" }}
+                tick={{ fontSize: 12, fill: '#64748b' }}
                 type="category"
                 interval="preserveStartEnd"
+                allowDataOverflow={false}
+                allowDecimals={true}
+                allowDuplicatedCategory={true}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: "#64748b" }}
+                tick={{ fontSize: 12, fill: '#64748b' }}
                 type="number"
-                domain={["dataMin", "dataMax"]}
+                domain={['dataMin', 'dataMax']}
+                allowDataOverflow={false}
+                allowDecimals={true}
+                allowDuplicatedCategory={true}
+              />
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "white",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "8px",
-                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                  backgroundColor: 'white',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                 }}
+                cursor={true}
+                shared={false}
+                trigger="hover"
+                animationDuration={0}
+              />
               />
               <Line
                 type="monotone"
                 dataKey="sales"
                 stroke="#3b82f6"
                 strokeWidth={3}
-                dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: "#3b82f6", strokeWidth: 2 }}
+                dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2 }}
+                connectNulls={true}
+                legendType="line"
+                hide={false}
               />
               <Line
                 type="monotone"
@@ -79,8 +103,12 @@ export default function SalesChart() {
                 stroke="#f97316"
                 strokeWidth={3}
                 strokeDasharray="5 5"
-                dot={{ fill: "#f97316", strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: "#f97316", strokeWidth: 2 }}
+                dot={{ fill: '#f97316', strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: '#f97316', strokeWidth: 2 }}
+                connectNulls={true}
+                legendType="line"
+                hide={false}
+              />
               />
             </LineChart>
           </ResponsiveContainer>
