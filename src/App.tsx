@@ -17,6 +17,7 @@ import Analytics from "./pages/Analytics";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
 import Settings from "./pages/Settings";
+import StandaloneProducts from "./pages/Products";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -102,6 +103,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Settings />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <DashboardLayout>
+                <StandaloneProducts />
               </DashboardLayout>
             }
           />
