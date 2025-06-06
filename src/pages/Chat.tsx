@@ -22,7 +22,7 @@ import {
   Settings,
   Archive,
   Star,
-  Mute,
+  VolumeX,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -331,7 +331,7 @@ export default function Chat() {
                         Star Conversation
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <Mute className="h-4 w-4 mr-2" />
+                        <VolumeX className="h-4 w-4 mr-2" />
                         Mute Notifications
                       </DropdownMenuItem>
                       <DropdownMenuItem>
