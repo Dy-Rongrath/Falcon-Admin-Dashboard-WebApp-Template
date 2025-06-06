@@ -22,6 +22,9 @@ import Events from "./pages/Events";
 import SupportDesk from "./pages/support/SupportDesk";
 import Authentication from "./pages/Authentication";
 import Utilities from "./pages/Utilities";
+import FileManager from "./pages/FileManager";
+import Chat from "./pages/Chat";
+import Invoices from "./pages/Invoices";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -147,6 +150,30 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Utilities />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/files"
+            element={
+              <DashboardLayout>
+                <FileManager />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <DashboardLayout>
+                <Chat />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/invoices"
+            element={
+              <DashboardLayout>
+                <Invoices />
               </DashboardLayout>
             }
           />

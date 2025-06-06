@@ -20,6 +20,9 @@ import {
   Zap,
   ChevronDown,
   ChevronRight,
+  MessageSquare,
+  File,
+  CreditCard,
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -53,6 +56,9 @@ const navigationItems: NavItem[] = [
   { icon: Mail, label: "Email", badge: "6", path: "/email" },
   { icon: Calendar, label: "Events", path: "/events" },
   { icon: FileText, label: "Kanban", path: "/kanban" },
+  { icon: MessageSquare, label: "Chat", path: "/chat" },
+  { icon: File, label: "Files", path: "/files" },
+  { icon: CreditCard, label: "Invoices", path: "/invoices" },
   {
     icon: Briefcase,
     label: "Support desk",
