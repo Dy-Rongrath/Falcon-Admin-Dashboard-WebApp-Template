@@ -62,11 +62,6 @@ export default function TopProductsChart() {
                 type="number"
                 domain={['dataMin', 'dataMax']}
               />
-              <YAxis
-                yAxisId="revenue"
-                orientation="right"
-                axisLine={false}
-                tickLine={false}
                 tick={{ fontSize: 12, fill: '#64748b' }}
                 label={{ value: 'Revenue ($)', angle: 90, position: 'insideRight' }}
                 type="number"
