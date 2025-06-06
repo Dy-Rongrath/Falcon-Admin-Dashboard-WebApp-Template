@@ -306,7 +306,7 @@ export default function Analytics() {
               <CardContent>
                 <div className="h-80">
                   <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
+                    <PieChart width={400} height={400}>
                       <Pie
                         data={deviceData}
                         cx="50%"
@@ -315,12 +315,22 @@ export default function Analytics() {
                         fill="#8884d8"
                         dataKey="value"
                         label={({ name, value }) => `${name}: ${value}%`}
+                        labelLine={false}
+                        animationBegin={0}
+                        animationDuration={800}
                       >
                         {deviceData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "white",
+                          border: "1px solid #e2e8f0",
+                          borderRadius: "8px",
+                          boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
