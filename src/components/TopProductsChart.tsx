@@ -45,7 +45,7 @@ export default function TopProductsChart() {
                 dataKey="product"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#64748b' }}
+                tick={{ fontSize: 12, fill: "#64748b" }}
                 angle={-45}
                 textAnchor="end"
                 height={80}
@@ -57,18 +57,14 @@ export default function TopProductsChart() {
                 orientation="left"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#64748b' }}
-                label={{ value: 'Units Sold', angle: -90, position: 'insideLeft' }}
-                type="number"
-                domain={['dataMin', 'dataMax']}
-              />
-                tick={{ fontSize: 12, fill: '#64748b' }}
-                label={{ value: 'Revenue ($)', angle: 90, position: 'insideRight' }}
-                type="number"
-                domain={['dataMin', 'dataMax']}
-              />
+                tick={{ fontSize: 12, fill: "#64748b" }}
+                label={{
+                  value: "Units Sold",
+                  angle: -90,
                   position: "insideLeft",
                 }}
+                type="number"
+                domain={["dataMin", "dataMax"]}
               />
               <YAxis
                 yAxisId="revenue"
@@ -81,6 +77,8 @@ export default function TopProductsChart() {
                   angle: 90,
                   position: "insideRight",
                 }}
+                type="number"
+                domain={["dataMin", "dataMax"]}
               />
               <Tooltip
                 contentStyle={{
