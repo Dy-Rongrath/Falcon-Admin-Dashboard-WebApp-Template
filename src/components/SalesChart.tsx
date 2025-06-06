@@ -72,7 +72,6 @@ export default function SalesChart() {
                 allowDecimals={true}
                 allowDuplicatedCategory={true}
               />
-              />
               <Tooltip
                 contentStyle={{
                   backgroundColor: 'white',
