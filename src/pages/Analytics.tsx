@@ -200,22 +200,21 @@ export default function Analytics() {
                         type="category"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        tick={{ fontSize: 12, fill: '#64748b' }}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
                       />
                       <YAxis
                         type="number"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                        domain={["dataMin", "dataMax"]}
+                        tick={{ fontSize: 12, fill: '#64748b' }}
+                        domain={['dataMin', 'dataMax']}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
                       />
-                      <Tooltip />
-                      <Line
-                        type="monotone"
-                        dataKey="visitors"
-                        stroke="#3b82f6"
-                        strokeWidth={3}
-                        dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -237,22 +236,21 @@ export default function Analytics() {
                         type="category"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        tick={{ fontSize: 12, fill: '#64748b' }}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
                       />
                       <YAxis
                         type="number"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                        domain={["dataMin", "dataMax"]}
+                        tick={{ fontSize: 12, fill: '#64748b' }}
+                        domain={['dataMin', 'dataMax']}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
                       />
-                      <Tooltip />
-                      <Area
-                        type="monotone"
-                        dataKey="pageViews"
-                        stroke="#10b981"
-                        fill="#10b981"
-                        fillOpacity={0.3}
                       />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -277,14 +275,21 @@ export default function Analytics() {
                       type="category"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fontSize: 12, fill: "#64748b" }}
+                      tick={{ fontSize: 12, fill: '#64748b' }}
+                      allowDataOverflow={false}
+                      allowDecimals={true}
+                      allowDuplicatedCategory={true}
                     />
                     <YAxis
                       type="number"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fontSize: 12, fill: "#64748b" }}
-                      domain={["dataMin", "dataMax"]}
+                      tick={{ fontSize: 12, fill: '#64748b' }}
+                      domain={['dataMin', 'dataMax']}
+                      allowDataOverflow={false}
+                      allowDecimals={true}
+                      allowDuplicatedCategory={true}
+                    />
                     />
                     <Tooltip />
                     <Legend />
