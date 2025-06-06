@@ -215,7 +215,6 @@ export default function Analytics() {
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
                       />
-                      />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
