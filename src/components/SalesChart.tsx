@@ -55,7 +55,7 @@ export default function SalesChart() {
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#64748b' }}
+                tick={{ fontSize: 12, fill: "#64748b" }}
                 type="category"
                 interval="preserveStartEnd"
                 allowDataOverflow={false}
@@ -65,33 +65,32 @@ export default function SalesChart() {
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#64748b' }}
+                tick={{ fontSize: 12, fill: "#64748b" }}
                 type="number"
-                domain={['dataMin', 'dataMax']}
+                domain={["dataMin", "dataMax"]}
                 allowDataOverflow={false}
                 allowDecimals={true}
                 allowDuplicatedCategory={true}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: 'white',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  backgroundColor: "white",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "8px",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 }}
                 cursor={true}
                 shared={false}
                 trigger="hover"
                 animationDuration={0}
               />
-              />
               <Line
                 type="monotone"
                 dataKey="sales"
                 stroke="#3b82f6"
                 strokeWidth={3}
-                dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2 }}
+                dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: "#3b82f6", strokeWidth: 2 }}
                 connectNulls={true}
                 legendType="line"
                 hide={false}
@@ -102,12 +101,11 @@ export default function SalesChart() {
                 stroke="#f97316"
                 strokeWidth={3}
                 strokeDasharray="5 5"
-                dot={{ fill: '#f97316', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#f97316', strokeWidth: 2 }}
+                dot={{ fill: "#f97316", strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: "#f97316", strokeWidth: 2 }}
                 connectNulls={true}
                 legendType="line"
                 hide={false}
-              />
               />
             </LineChart>
           </ResponsiveContainer>
