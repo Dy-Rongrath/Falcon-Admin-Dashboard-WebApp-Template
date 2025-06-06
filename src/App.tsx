@@ -13,6 +13,9 @@ import Products from "./pages/ecommerce/Products";
 import Orders from "./pages/ecommerce/Orders";
 import UserManagement from "./pages/UserManagement";
 import Analytics from "./pages/Analytics";
+import Email from "./pages/Email";
+import Kanban from "./pages/Kanban";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +69,30 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Analytics />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/email"
+            element={
+              <DashboardLayout>
+                <Email />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/kanban"
+            element={
+              <DashboardLayout>
+                <Kanban />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <DashboardLayout>
+                <Settings />
               </DashboardLayout>
             }
           />
