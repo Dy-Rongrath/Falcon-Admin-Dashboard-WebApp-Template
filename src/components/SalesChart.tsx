@@ -43,47 +43,18 @@ export default function SalesChart() {
             <LineChart
               data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              reverseStackOrder={false}
             >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="#e2e8f0"
-                horizontal={true}
-                vertical={true}
-              />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 12, fill: "#64748b" }}
-                type="category"
-                interval="preserveStartEnd"
-                allowDataOverflow={false}
-                allowDecimals={true}
-                allowDuplicatedCategory={true}
-                scale="auto"
-                tickCount={undefined}
-                minTickGap={5}
-                mirror={false}
-                reversed={false}
-                hide={false}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 12, fill: "#64748b" }}
-                type="number"
-                domain={["dataMin", "dataMax"]}
-                allowDataOverflow={false}
-                allowDecimals={true}
-                allowDuplicatedCategory={true}
-                scale="auto"
-                tickCount={undefined}
-                minTickGap={5}
-                mirror={false}
-                reversed={false}
-                hide={false}
-                orientation="left"
               />
               <Tooltip
                 contentStyle={{
@@ -92,10 +63,6 @@ export default function SalesChart() {
                   borderRadius: "8px",
                   boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 }}
-                cursor={true}
-                shared={false}
-                trigger="hover"
-                animationDuration={0}
               />
               <Line
                 type="monotone"
@@ -104,9 +71,6 @@ export default function SalesChart() {
                 strokeWidth={3}
                 dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
                 activeDot={{ r: 6, stroke: "#3b82f6", strokeWidth: 2 }}
-                connectNulls={true}
-                legendType="line"
-                hide={false}
               />
               <Line
                 type="monotone"
@@ -116,9 +80,6 @@ export default function SalesChart() {
                 strokeDasharray="5 5"
                 dot={{ fill: "#f97316", strokeWidth: 2, r: 4 }}
                 activeDot={{ r: 6, stroke: "#f97316", strokeWidth: 2 }}
-                connectNulls={true}
-                legendType="line"
-                hide={false}
               />
             </LineChart>
           </ResponsiveContainer>
