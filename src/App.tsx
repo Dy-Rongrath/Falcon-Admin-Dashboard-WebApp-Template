@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SideNavigation from "@/components/SideNavigation";
 import TopNavigationBar from "@/components/TopNavigationBar";
 import CustomizeButton from "@/components/CustomizeButton";
+import Footer from "@/components/Footer";
 
 // Pages
 import Index from "./pages/Index";
@@ -38,11 +39,12 @@ const queryClient = new QueryClient();
 
 // Layout component for pages with sidebar
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="min-h-screen bg-slate-50 flex">
+  <div className="min-h-screen bg-falcon-bg-light flex">
     <SideNavigation />
-    <div className="flex-1 ml-64">
+    <div className="flex-1 ml-64 flex flex-col">
       <TopNavigationBar />
-      <main className="p-6">{children}</main>
+      <main className="flex-1 p-6">{children}</main>
+      <Footer />
     </div>
     <CustomizeButton />
   </div>
