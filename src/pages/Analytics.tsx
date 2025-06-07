@@ -204,6 +204,13 @@ export default function Analytics() {
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
+                        scale="auto"
+                        tickCount={undefined}
+                        minTickGap={5}
+                        mirror={false}
+                        reversed={false}
+                        hide={false}
+                        interval="preserveStartEnd"
                       />
                       <YAxis
                         type="number"
@@ -214,6 +221,13 @@ export default function Analytics() {
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
+                        scale="auto"
+                        tickCount={undefined}
+                        minTickGap={5}
+                        mirror={false}
+                        reversed={false}
+                        hide={false}
+                        orientation="left"
                       />
                     </LineChart>
                   </ResponsiveContainer>
