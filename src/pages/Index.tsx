@@ -1,5 +1,3 @@
-import SideNavigation from "@/components/SideNavigation";
-import TopNavigationBar from "@/components/TopNavigationBar";
 import MetricCard from "@/components/MetricCard";
 import RunningProjects from "@/components/RunningProjects";
 import SalesChart from "@/components/SalesChart";
@@ -10,21 +8,9 @@ import SharedFiles from "@/components/SharedFiles";
 import ActiveUsers from "@/components/ActiveUsers";
 import BandwidthChart from "@/components/BandwidthChart";
 import TopProductsChart from "@/components/TopProductsChart";
-import CustomizeButton from "@/components/CustomizeButton";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-slate-50 flex">
-      {/* Sidebar Navigation */}
-      <SideNavigation />
-
-      {/* Main Content */}
-      <div className="flex-1 ml-64">
-        {/* Top Navigation */}
-        <TopNavigationBar />
-
-        {/* Dashboard Content */}
-        <main className="p-6">
           {/* Dashboard Grid */}
           <div className="space-y-6">
             {/* First Row - Metric Cards */}
