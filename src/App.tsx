@@ -69,6 +69,8 @@ import Starter from "./pages/Starter";
 import NotFound from "./pages/NotFound";
 import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
+import FAQ from "./pages/FAQ";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -559,6 +561,30 @@ const App = () => (
           />
           <Route path="/404" element={<Error404 />} />
           <Route path="/500" element={<Error500 />} />
+          <Route
+            path="/faq"
+            element={
+              <DashboardLayout>
+                <FAQ />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/pricing"
+            element={
+              <DashboardLayout>
+                <Pricing />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/docs/faq"
+            element={
+              <DashboardLayout>
+                <FAQ />
+              </DashboardLayout>
+            }
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
