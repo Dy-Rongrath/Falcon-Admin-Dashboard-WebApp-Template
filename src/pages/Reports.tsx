@@ -11,6 +11,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
   LineChart,
   Line,
   AreaChart,
@@ -42,47 +50,97 @@ import {
   PieChart as PieChartIcon,
   Share2,
   RefreshCw,
+  FileSpreadsheet,
+  Printer,
+  Mail,
 } from "lucide-react";
 
-const salesData = [
-  { month: "Jan", revenue: 45000, orders: 120, customers: 89 },
-  { month: "Feb", revenue: 52000, orders: 140, customers: 95 },
-  { month: "Mar", revenue: 48000, orders: 135, customers: 102 },
-  { month: "Apr", revenue: 61000, orders: 165, customers: 118 },
-  { month: "May", revenue: 55000, orders: 155, customers: 124 },
-  { month: "Jun", revenue: 67000, orders: 180, customers: 142 },
-  { month: "Jul", revenue: 71000, orders: 195, customers: 156 },
-  { month: "Aug", revenue: 69000, orders: 188, customers: 151 },
-  { month: "Sep", revenue: 75000, orders: 205, customers: 167 },
-  { month: "Oct", revenue: 82000, orders: 220, customers: 178 },
-  { month: "Nov", revenue: 79000, orders: 215, customers: 184 },
-  { month: "Dec", revenue: 88000, orders: 245, customers: 201 },
+const salesReportData = [
+  { month: "Jan", revenue: 45000, orders: 120, customers: 89, profit: 12000 },
+  { month: "Feb", revenue: 52000, orders: 140, customers: 95, profit: 14500 },
+  { month: "Mar", revenue: 48000, orders: 135, customers: 102, profit: 13200 },
+  { month: "Apr", revenue: 61000, orders: 165, customers: 118, profit: 17800 },
+  { month: "May", revenue: 55000, orders: 155, customers: 124, profit: 16100 },
+  { month: "Jun", revenue: 67000, orders: 180, customers: 142, profit: 19500 },
+  { month: "Jul", revenue: 71000, orders: 195, customers: 156, profit: 21200 },
+  { month: "Aug", revenue: 69000, orders: 188, customers: 151, profit: 20400 },
+  { month: "Sep", revenue: 75000, orders: 205, customers: 167, profit: 22800 },
+  { month: "Oct", revenue: 82000, orders: 220, customers: 178, profit: 25100 },
+  { month: "Nov", revenue: 79000, orders: 215, customers: 184, profit: 24200 },
+  { month: "Dec", revenue: 88000, orders: 245, customers: 201, profit: 27500 },
 ];
 
-const userTrafficData = [
-  { time: "00:00", users: 1200, pageViews: 3400, sessions: 2100 },
-  { time: "04:00", users: 800, pageViews: 2200, sessions: 1400 },
-  { time: "08:00", users: 2400, pageViews: 6800, sessions: 4200 },
-  { time: "12:00", users: 3200, pageViews: 8900, sessions: 5600 },
-  { time: "16:00", users: 2800, pageViews: 7600, sessions: 4800 },
-  { time: "20:00", users: 2000, pageViews: 5400, sessions: 3400 },
-  { time: "24:00", users: 1400, pageViews: 3800, sessions: 2400 },
+const userActivityData = [
+  { date: "2024-01-01", activeUsers: 1200, newUsers: 340, returnUsers: 860 },
+  { date: "2024-01-08", activeUsers: 1100, newUsers: 280, returnUsers: 820 },
+  { date: "2024-01-15", activeUsers: 1350, newUsers: 420, returnUsers: 930 },
+  { date: "2024-01-22", activeUsers: 1280, newUsers: 380, returnUsers: 900 },
+  { date: "2024-01-29", activeUsers: 1420, newUsers: 460, returnUsers: 960 },
+  { date: "2024-02-05", activeUsers: 1380, newUsers: 440, returnUsers: 940 },
+  { date: "2024-02-12", activeUsers: 1580, newUsers: 520, returnUsers: 1060 },
 ];
 
-const productCategoryData = [
-  { name: "Electronics", value: 35, color: "#3b82f6" },
-  { name: "Clothing", value: 25, color: "#10b981" },
-  { name: "Books", value: 20, color: "#f59e0b" },
-  { name: "Home & Garden", value: 15, color: "#ef4444" },
-  { name: "Sports", value: 5, color: "#8b5cf6" },
+const productPerformanceData = [
+  { product: "iPhone 14 Pro", sales: 1250, revenue: 1248750, growth: 12.5 },
+  { product: "MacBook Air", sales: 950, revenue: 1138050, growth: 8.2 },
+  { product: "iPad Pro", sales: 750, revenue: 599250, growth: -2.1 },
+  { product: "AirPods Pro", sales: 680, revenue: 169320, growth: 15.3 },
+  { product: "Apple Watch", sales: 540, revenue: 215460, growth: 6.8 },
+  { product: 'iMac 24"', sales: 320, revenue: 639680, growth: -5.2 },
+  { product: "Mac Studio", sales: 180, revenue: 1079820, growth: 22.1 },
+  { product: "Studio Display", sales: 150, revenue: 239850, growth: 9.7 },
 ];
 
-const topProductsData = [
-  { product: "iPhone 14 Pro", sales: 1250, revenue: 1248750 },
-  { product: "MacBook Air", sales: 950, revenue: 1138050 },
-  { product: "iPad Pro", sales: 750, revenue: 599250 },
-  { product: "AirPods Pro", sales: 680, revenue: 169320 },
-  { product: "Apple Watch", sales: 540, revenue: 215460 },
+const trafficSourceData = [
+  {
+    source: "Organic Search",
+    visits: 45000,
+    percentage: 42.1,
+    color: "#2C7BE5",
+  },
+  { source: "Direct", visits: 28000, percentage: 26.2, color: "#00D27A" },
+  { source: "Social Media", visits: 18000, percentage: 16.8, color: "#F5803E" },
+  { source: "Email", visits: 8500, percentage: 7.9, color: "#6C757D" },
+  { source: "Paid Ads", visits: 7500, percentage: 7.0, color: "#E91E63" },
+];
+
+const financialData = [
+  { category: "Revenue", q1: 145000, q2: 167000, q3: 189000, q4: 203000 },
+  { category: "Expenses", q1: 89000, q2: 102000, q3: 115000, q4: 128000 },
+  { category: "Profit", q1: 56000, q2: 65000, q3: 74000, q4: 75000 },
+];
+
+const topCustomersData = [
+  {
+    name: "Acme Corporation",
+    orders: 45,
+    revenue: 89500,
+    lastOrder: "2024-02-15",
+  },
+  {
+    name: "TechStart Inc.",
+    orders: 38,
+    revenue: 76200,
+    lastOrder: "2024-02-14",
+  },
+  {
+    name: "Global Solutions",
+    orders: 42,
+    revenue: 69800,
+    lastOrder: "2024-02-13",
+  },
+  {
+    name: "Innovation Labs",
+    orders: 29,
+    revenue: 58400,
+    lastOrder: "2024-02-12",
+  },
+  {
+    name: "Digital Dynamics",
+    orders: 35,
+    revenue: 52700,
+    lastOrder: "2024-02-11",
+  },
 ];
 
 export default function Reports() {
@@ -95,154 +153,164 @@ export default function Reports() {
     { id: "users", label: "User Analytics", icon: Users },
     { id: "products", label: "Product Performance", icon: ShoppingCart },
     { id: "traffic", label: "Website Traffic", icon: Eye },
+    { id: "financial", label: "Financial", icon: FileSpreadsheet },
   ];
 
-  const totalRevenue = salesData.reduce((sum, item) => sum + item.revenue, 0);
-  const totalOrders = salesData.reduce((sum, item) => sum + item.orders, 0);
-  const totalCustomers = salesData.reduce(
-    (sum, item) => sum + item.customers,
-    0,
-  );
-  const avgOrderValue = totalRevenue / totalOrders;
+  const totalRevenue = 704000;
+  const totalOrders = 2013;
+  const totalCustomers = 1445;
+  const averageOrderValue = 349.78;
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <FileText className="h-6 w-6" />
+          <h1 className="text-2xl font-bold text-falcon-text-primary font-poppins flex items-center gap-2">
+            <FileText className="h-6 w-6 text-falcon-blue" />
             Reports & Analytics
           </h1>
-          <p className="text-gray-600">
-            Comprehensive business analytics and reporting
+          <p className="text-falcon-text-secondary font-poppins">
+            Comprehensive business insights and performance metrics
           </p>
         </div>
         <div className="flex gap-2">
           <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
             <SelectTrigger className="w-40">
+              <Calendar className="h-4 w-4 mr-2" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="last-7-days">Last 7 days</SelectItem>
-              <SelectItem value="last-30-days">Last 30 days</SelectItem>
-              <SelectItem value="last-90-days">Last 90 days</SelectItem>
-              <SelectItem value="last-year">Last year</SelectItem>
+              <SelectItem value="last-7-days">Last 7 Days</SelectItem>
+              <SelectItem value="last-30-days">Last 30 Days</SelectItem>
+              <SelectItem value="last-90-days">Last 90 Days</SelectItem>
+              <SelectItem value="last-year">Last Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline">
+          <Button variant="outline" className="font-poppins">
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
-          <Button className="bg-blue-600 hover:bg-blue-700">
+          <Button className="bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90 font-poppins">
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
         </div>
       </div>
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <DollarSign className="h-5 w-5 text-green-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Total Revenue</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  ${totalRevenue.toLocaleString()}
-                </p>
-                <div className="flex items-center gap-1 mt-1">
-                  <TrendingUp className="h-3 w-3 text-green-600" />
-                  <span className="text-xs text-green-600">+12.5%</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <ShoppingCart className="h-5 w-5 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Total Orders</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {totalOrders.toLocaleString()}
-                </p>
-                <div className="flex items-center gap-1 mt-1">
-                  <TrendingUp className="h-3 w-3 text-green-600" />
-                  <span className="text-xs text-green-600">+8.2%</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <Users className="h-5 w-5 text-purple-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Total Customers</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {totalCustomers.toLocaleString()}
-                </p>
-                <div className="flex items-center gap-1 mt-1">
-                  <TrendingUp className="h-3 w-3 text-green-600" />
-                  <span className="text-xs text-green-600">+15.3%</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <BarChart3 className="h-5 w-5 text-orange-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Avg Order Value</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  ${avgOrderValue.toFixed(2)}
-                </p>
-                <div className="flex items-center gap-1 mt-1">
-                  <TrendingDown className="h-3 w-3 text-red-600" />
-                  <span className="text-xs text-red-600">-2.1%</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Report Types Navigation */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-wrap gap-2">
+      {/* Report Type Selector */}
+      <Card className="bg-white border-falcon-border-light">
+        <CardContent className="p-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {reportTypes.map((type) => (
               <Button
                 key={type.id}
                 variant={selectedReport === type.id ? "default" : "outline"}
-                size="sm"
+                className={`flex flex-col items-center gap-2 h-20 font-poppins ${
+                  selectedReport === type.id
+                    ? "bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90"
+                    : "hover:bg-falcon-bg-light"
+                }`}
                 onClick={() => setSelectedReport(type.id)}
-                className="gap-2"
               >
-                <type.icon className="h-4 w-4" />
-                {type.label}
+                <type.icon className="h-5 w-5" />
+                <span className="text-xs">{type.label}</span>
               </Button>
             ))}
           </div>
         </CardContent>
       </Card>
+
+      {/* Key Metrics Summary */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card className="bg-white border-falcon-border-light">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  Total Revenue
+                </p>
+                <p className="text-2xl font-bold text-falcon-text-primary font-poppins">
+                  ${totalRevenue.toLocaleString()}
+                </p>
+                <div className="flex items-center gap-1 text-sm text-falcon-green font-poppins">
+                  <TrendingUp className="h-4 w-4" />
+                  +18.2%
+                </div>
+              </div>
+              <div className="p-3 bg-falcon-blue bg-opacity-10 rounded-lg">
+                <DollarSign className="h-6 w-6 text-falcon-blue" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white border-falcon-border-light">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  Total Orders
+                </p>
+                <p className="text-2xl font-bold text-falcon-text-primary font-poppins">
+                  {totalOrders.toLocaleString()}
+                </p>
+                <div className="flex items-center gap-1 text-sm text-falcon-green font-poppins">
+                  <TrendingUp className="h-4 w-4" />
+                  +12.5%
+                </div>
+              </div>
+              <div className="p-3 bg-falcon-green bg-opacity-10 rounded-lg">
+                <ShoppingCart className="h-6 w-6 text-falcon-green" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white border-falcon-border-light">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  Total Customers
+                </p>
+                <p className="text-2xl font-bold text-falcon-text-primary font-poppins">
+                  {totalCustomers.toLocaleString()}
+                </p>
+                <div className="flex items-center gap-1 text-sm text-falcon-green font-poppins">
+                  <TrendingUp className="h-4 w-4" />
+                  +8.7%
+                </div>
+              </div>
+              <div className="p-3 bg-falcon-orange bg-opacity-10 rounded-lg">
+                <Users className="h-6 w-6 text-falcon-orange" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white border-falcon-border-light">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  Average Order Value
+                </p>
+                <p className="text-2xl font-bold text-falcon-text-primary font-poppins">
+                  ${averageOrderValue}
+                </p>
+                <div className="flex items-center gap-1 text-sm text-falcon-green font-poppins">
+                  <TrendingUp className="h-4 w-4" />
+                  +3.2%
+                </div>
+              </div>
+              <div className="p-3 bg-purple-100 rounded-lg">
+                <BarChart3 className="h-6 w-6 text-purple-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Report Content */}
       <Tabs
@@ -250,23 +318,29 @@ export default function Reports() {
         onValueChange={setSelectedReport}
         className="space-y-6"
       >
-        <TabsContent value="overview">
+        <TabsContent value="overview" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
+            <Card className="bg-white border-falcon-border-light">
               <CardHeader>
-                <CardTitle>Revenue Trend</CardTitle>
+                <CardTitle className="font-poppins text-falcon-text-primary">
+                  Revenue Trend
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-80">
                   <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={salesData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <LineChart data={salesReportData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#D8E2EF" />
                       <XAxis
                         dataKey="month"
+                        type="category"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                        type="category"
+                        tick={{
+                          fontSize: 12,
+                          fill: "#4D5969",
+                          fontFamily: "Poppins",
+                        }}
                         allowDataOverflow={false}
                         allowDecimals={true}
                         allowDuplicatedCategory={true}
@@ -279,10 +353,14 @@ export default function Reports() {
                         interval="preserveStartEnd"
                       />
                       <YAxis
+                        type="number"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                        type="number"
+                        tick={{
+                          fontSize: 12,
+                          fill: "#4D5969",
+                          fontFamily: "Poppins",
+                        }}
                         domain={["dataMin", "dataMax"]}
                         allowDataOverflow={false}
                         allowDecimals={true}
@@ -295,13 +373,27 @@ export default function Reports() {
                         hide={false}
                         orientation="left"
                       />
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "white",
+                          border: "1px solid #D8E2EF",
+                          borderRadius: "8px",
+                          fontFamily: "Poppins",
+                        }}
+                      />
                       <Line
                         type="monotone"
                         dataKey="revenue"
-                        stroke="#3b82f6"
+                        stroke="#2C7BE5"
                         strokeWidth={3}
-                        dot={{ fill: "#3b82f6", r: 4 }}
+                        dot={{ fill: "#2C7BE5", strokeWidth: 2, r: 4 }}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="profit"
+                        stroke="#00D27A"
+                        strokeWidth={3}
+                        dot={{ fill: "#00D27A", strokeWidth: 2, r: 4 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -309,45 +401,117 @@ export default function Reports() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="bg-white border-falcon-border-light">
               <CardHeader>
-                <CardTitle>Sales by Category</CardTitle>
+                <CardTitle className="font-poppins text-falcon-text-primary">
+                  Traffic Sources
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-80">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
-                        data={productCategoryData}
+                        data={trafficSourceData}
                         cx="50%"
                         cy="50%"
-                        outerRadius={100}
-                        dataKey="value"
-                        label={({ name, value }) => `${name}: ${value}%`}
+                        innerRadius={60}
+                        outerRadius={120}
+                        paddingAngle={5}
+                        dataKey="visits"
                       >
-                        {productCategoryData.map((entry, index) => (
+                        {trafficSourceData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "white",
+                          border: "1px solid #D8E2EF",
+                          borderRadius: "8px",
+                          fontFamily: "Poppins",
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
+                </div>
+                <div className="space-y-2 mt-4">
+                  {trafficSourceData.map((source) => (
+                    <div
+                      key={source.source}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <div className="flex items-center gap-2">
+                        <div
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: source.color }}
+                        ></div>
+                        <span className="font-medium text-falcon-text-primary font-poppins">
+                          {source.source}
+                        </span>
+                      </div>
+                      <span className="text-falcon-text-secondary font-poppins">
+                        {source.percentage}%
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
           </div>
+
+          {/* Top Customers Table */}
+          <Card className="bg-white border-falcon-border-light">
+            <CardHeader>
+              <CardTitle className="font-poppins text-falcon-text-primary">
+                Top Customers
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="font-poppins">Customer</TableHead>
+                    <TableHead className="font-poppins">Orders</TableHead>
+                    <TableHead className="font-poppins">Revenue</TableHead>
+                    <TableHead className="font-poppins">Last Order</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {topCustomersData.map((customer) => (
+                    <TableRow key={customer.name}>
+                      <TableCell className="font-medium font-poppins">
+                        {customer.name}
+                      </TableCell>
+                      <TableCell className="font-poppins">
+                        {customer.orders}
+                      </TableCell>
+                      <TableCell className="font-poppins">
+                        ${customer.revenue.toLocaleString()}
+                      </TableCell>
+                      <TableCell className="font-poppins">
+                        {customer.lastOrder}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </TabsContent>
 
-        <TabsContent value="sales">
-          <div className="space-y-6">
-            <Card>
+        <TabsContent value="sales" className="space-y-6">
+          <div className="grid grid-cols-1 gap-6">
+            <Card className="bg-white border-falcon-border-light">
               <CardHeader>
-                <CardTitle>Sales Performance Over Time</CardTitle>
+                <CardTitle className="font-poppins text-falcon-text-primary">
+                  Monthly Sales Performance
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-96">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={salesData}>
+                    <AreaChart data={salesReportData}>
                       <defs>
                         <linearGradient
                           id="revenueGradient"
@@ -358,222 +522,17 @@ export default function Reports() {
                         >
                           <stop
                             offset="5%"
-                            stopColor="#3b82f6"
-                            stopOpacity={0.8}
+                            stopColor="#2C7BE5"
+                            stopOpacity={0.3}
                           />
                           <stop
                             offset="95%"
-                            stopColor="#3b82f6"
-                            stopOpacity={0.1}
+                            stopColor="#2C7BE5"
+                            stopOpacity={0}
                           />
                         </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                      <XAxis
-                        dataKey="month"
-                        axisLine={false}
-                        tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                      />
-                      <YAxis
-                        axisLine={false}
-                        tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                      />
-                      <Tooltip />
-                      <Area
-                        type="monotone"
-                        dataKey="revenue"
-                        stroke="#3b82f6"
-                        strokeWidth={2}
-                        fill="url(#revenueGradient)"
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Top Performing Products</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-80">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={topProductsData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                      <XAxis
-                        dataKey="product"
-                        axisLine={false}
-                        tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                        angle={-45}
-                        textAnchor="end"
-                        height={80}
-                      />
-                      <YAxis
-                        axisLine={false}
-                        tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
-                      />
-                      <Tooltip />
-                      <Bar
-                        dataKey="sales"
-                        fill="#3b82f6"
-                        radius={[4, 4, 0, 0]}
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="users">
-          <Card>
-            <CardHeader>
-              <CardTitle>User Activity Patterns</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-96">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={userTrafficData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis
-                      dataKey="time"
-                      axisLine={false}
-                      tickLine={false}
-                      tick={{ fontSize: 12, fill: "#64748b" }}
-                    />
-                    <YAxis
-                      axisLine={false}
-                      tickLine={false}
-                      tick={{ fontSize: 12, fill: "#64748b" }}
-                    />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="users"
-                      stroke="#3b82f6"
-                      strokeWidth={2}
-                      name="Users"
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="sessions"
-                      stroke="#10b981"
-                      strokeWidth={2}
-                      name="Sessions"
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="pageViews"
-                      stroke="#f59e0b"
-                      strokeWidth={2}
-                      name="Page Views"
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="products">
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <PieChartIcon className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                  <h3 className="font-semibold text-gray-900">Top Category</h3>
-                  <p className="text-2xl font-bold text-blue-600">
-                    Electronics
-                  </p>
-                  <p className="text-sm text-gray-500">35% of total sales</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                  <h3 className="font-semibold text-gray-900">Best Seller</h3>
-                  <p className="text-2xl font-bold text-green-600">
-                    iPhone 14 Pro
-                  </p>
-                  <p className="text-sm text-gray-500">1,250 units sold</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <DollarSign className="h-8 w-8 text-purple-500 mx-auto mb-2" />
-                  <h3 className="font-semibold text-gray-900">
-                    Highest Revenue
-                  </h3>
-                  <p className="text-2xl font-bold text-purple-600">$1.25M</p>
-                  <p className="text-sm text-gray-500">From iPhone sales</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Product Performance Matrix</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {topProductsData.map((product, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between p-4 border rounded-lg"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <span className="text-sm font-medium">
-                            #{index + 1}
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-900">
-                            {product.product}
-                          </h4>
-                          <p className="text-sm text-gray-500">
-                            {product.sales} units sold
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-semibold text-gray-900">
-                          ${product.revenue.toLocaleString()}
-                        </p>
-                        <Badge variant="secondary">
-                          {((product.sales / 2000) * 100).toFixed(1)}% of target
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="traffic">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Daily Traffic Pattern</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-80">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={userTrafficData}>
-                      <defs>
                         <linearGradient
-                          id="trafficGradient"
+                          id="profitGradient"
                           x1="0"
                           y1="0"
                           x2="0"
@@ -581,68 +540,215 @@ export default function Reports() {
                         >
                           <stop
                             offset="5%"
-                            stopColor="#10b981"
-                            stopOpacity={0.8}
+                            stopColor="#00D27A"
+                            stopOpacity={0.3}
                           />
                           <stop
                             offset="95%"
-                            stopColor="#10b981"
-                            stopOpacity={0.1}
+                            stopColor="#00D27A"
+                            stopOpacity={0}
                           />
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#D8E2EF" />
                       <XAxis
-                        dataKey="time"
+                        dataKey="month"
+                        type="category"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        tick={{
+                          fontSize: 12,
+                          fill: "#4D5969",
+                          fontFamily: "Poppins",
+                        }}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
+                        scale="auto"
+                        tickCount={undefined}
+                        minTickGap={5}
+                        mirror={false}
+                        reversed={false}
+                        hide={false}
+                        interval="preserveStartEnd"
                       />
                       <YAxis
+                        type="number"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12, fill: "#64748b" }}
+                        tick={{
+                          fontSize: 12,
+                          fill: "#4D5969",
+                          fontFamily: "Poppins",
+                        }}
+                        domain={["dataMin", "dataMax"]}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
+                        scale="auto"
+                        tickCount={undefined}
+                        minTickGap={5}
+                        mirror={false}
+                        reversed={false}
+                        hide={false}
+                        orientation="left"
                       />
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "white",
+                          border: "1px solid #D8E2EF",
+                          borderRadius: "8px",
+                          fontFamily: "Poppins",
+                        }}
+                      />
                       <Area
                         type="monotone"
-                        dataKey="users"
-                        stroke="#10b981"
+                        dataKey="revenue"
+                        stroke="#2C7BE5"
                         strokeWidth={2}
-                        fill="url(#trafficGradient)"
+                        fill="url(#revenueGradient)"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="profit"
+                        stroke="#00D27A"
+                        strokeWidth={2}
+                        fill="url(#profitGradient)"
                       />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Traffic Sources</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">Direct Traffic</span>
-                    <Badge>45%</Badge>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">Search Engines</span>
-                    <Badge>30%</Badge>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">Social Media</span>
-                    <Badge>15%</Badge>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">Email Campaigns</span>
-                    <Badge>10%</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
+        </TabsContent>
+
+        <TabsContent value="products" className="space-y-6">
+          <Card className="bg-white border-falcon-border-light">
+            <CardHeader>
+              <CardTitle className="font-poppins text-falcon-text-primary">
+                Product Performance
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="font-poppins">Product</TableHead>
+                    <TableHead className="font-poppins">Sales</TableHead>
+                    <TableHead className="font-poppins">Revenue</TableHead>
+                    <TableHead className="font-poppins">Growth</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {productPerformanceData.map((product) => (
+                    <TableRow key={product.product}>
+                      <TableCell className="font-medium font-poppins">
+                        {product.product}
+                      </TableCell>
+                      <TableCell className="font-poppins">
+                        {product.sales}
+                      </TableCell>
+                      <TableCell className="font-poppins">
+                        ${product.revenue.toLocaleString()}
+                      </TableCell>
+                      <TableCell className="font-poppins">
+                        <div
+                          className={`flex items-center gap-1 ${product.growth >= 0 ? "text-falcon-green" : "text-red-600"}`}
+                        >
+                          {product.growth >= 0 ? (
+                            <TrendingUp className="h-4 w-4" />
+                          ) : (
+                            <TrendingDown className="h-4 w-4" />
+                          )}
+                          {product.growth}%
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="users" className="space-y-6">
+          <Card className="bg-white border-falcon-border-light">
+            <CardHeader>
+              <CardTitle className="font-poppins text-falcon-text-primary">
+                User Activity Trends
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={userActivityData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#D8E2EF" />
+                    <XAxis
+                      dataKey="date"
+                      type="category"
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{
+                        fontSize: 12,
+                        fill: "#4D5969",
+                        fontFamily: "Poppins",
+                      }}
+                      allowDataOverflow={false}
+                      allowDecimals={true}
+                      allowDuplicatedCategory={true}
+                      scale="auto"
+                      tickCount={undefined}
+                      minTickGap={5}
+                      mirror={false}
+                      reversed={false}
+                      hide={false}
+                      interval="preserveStartEnd"
+                    />
+                    <YAxis
+                      type="number"
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{
+                        fontSize: 12,
+                        fill: "#4D5969",
+                        fontFamily: "Poppins",
+                      }}
+                      domain={["dataMin", "dataMax"]}
+                      allowDataOverflow={false}
+                      allowDecimals={true}
+                      allowDuplicatedCategory={true}
+                      scale="auto"
+                      tickCount={undefined}
+                      minTickGap={5}
+                      mirror={false}
+                      reversed={false}
+                      hide={false}
+                      orientation="left"
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "white",
+                        border: "1px solid #D8E2EF",
+                        borderRadius: "8px",
+                        fontFamily: "Poppins",
+                      }}
+                    />
+                    <Bar
+                      dataKey="newUsers"
+                      fill="#2C7BE5"
+                      radius={[4, 4, 0, 0]}
+                    />
+                    <Bar
+                      dataKey="returnUsers"
+                      fill="#00D27A"
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
