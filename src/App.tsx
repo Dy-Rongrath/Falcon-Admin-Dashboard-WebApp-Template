@@ -76,6 +76,7 @@ import EmailDetail from "./pages/email/EmailDetail";
 import EmailCompose from "./pages/email/EmailCompose";
 import CourseList from "./pages/elearning/CourseList";
 import CourseGrid from "./pages/elearning/CourseGrid";
+import ActivityLog from "./pages/social/ActivityLog";
 
 const queryClient = new QueryClient();
 
@@ -597,6 +598,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Social />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/social/activity"
+            element={
+              <DashboardLayout>
+                <ActivityLog />
               </DashboardLayout>
             }
           />
