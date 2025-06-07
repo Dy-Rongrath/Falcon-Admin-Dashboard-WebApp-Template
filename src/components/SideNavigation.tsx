@@ -166,7 +166,7 @@ export default function SideNavigation({
     return false;
   };
 
-  const renderNavItem = (item: NavItem, level = 0) => {
+  const renderNavItem = (item: NavItem, level = 0, uniqueKey?: string) => {
     const hasChildren = item.children && item.children.length > 0;
     const isExpanded = expandedItems.includes(item.label);
     const itemIsActive = isActive(item.path) || isParentActive(item);
@@ -184,7 +184,7 @@ export default function SideNavigation({
     };
 
     return (
-      <div key={item.label}>
+      <div key={uniqueKey || `${item.label}-${level}`}>
         <Button
           variant="ghost"
           className={cn(
@@ -228,7 +228,7 @@ export default function SideNavigation({
         </Button>
         {hasChildren && isExpanded && (
           <div className="mt-1 space-y-1">
-            {item.children?.map((child) => renderNavItem(child, level + 1))}
+            {item.children?.map((child, index) => renderNavItem(child, level + 1, `${item.label}-${index}`))}
           </div>
         )}
       </div>
@@ -263,10 +263,9 @@ export default function SideNavigation({
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 px-3 pb-6">
-            <div className="space-y-1">
-              {navigationItems.map((item) => renderNavItem(item))}
-            </div>
+          <nav className="flex-1 space-y-1 p-4">
+            {navigationItems.map((item, index) => renderNavItem(item, 0, `nav-${index}`))}
+          </nav>
           </nav>
         </div>
       </ScrollArea>
