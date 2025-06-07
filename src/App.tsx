@@ -77,6 +77,7 @@ import EmailCompose from "./pages/email/EmailCompose";
 import CourseList from "./pages/elearning/CourseList";
 import CourseGrid from "./pages/elearning/CourseGrid";
 import ActivityLog from "./pages/social/ActivityLog";
+import SupportCards from "./pages/support/SupportCards";
 
 const queryClient = new QueryClient();
 
@@ -426,6 +427,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <SupportDesk />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/cards"
+            element={
+              <DashboardLayout>
+                <SupportCards />
               </DashboardLayout>
             }
           />
