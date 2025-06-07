@@ -34,6 +34,7 @@ import Components from "./pages/Components";
 import Notifications from "./pages/Notifications";
 import Calendar from "./pages/Calendar";
 import Reports from "./pages/Reports";
+import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -264,6 +265,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Reports />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <DashboardLayout>
+                <Cart />
               </DashboardLayout>
             }
           />
