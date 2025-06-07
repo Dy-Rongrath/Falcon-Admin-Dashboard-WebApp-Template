@@ -39,97 +39,181 @@ interface NavItem {
 }
 
 const navigationItems: NavItem[] = [
-  { icon: Home, label: "Dashboard", path: "/" },
   {
-    icon: ShoppingCart,
-    label: "E commerce",
+    icon: Home,
+    label: "Dashboard",
     children: [
+      { icon: Home, label: "Default", path: "/" },
+      { icon: BarChart3, label: "Analytics", path: "/analytics" },
+      { icon: Users, label: "CRM", path: "/dashboard/crm" },
+      { icon: ShoppingCart, label: "E commerce", path: "/ecommerce/products" },
+      { icon: Package, label: "LMS", badge: "New", path: "/dashboard/lms" },
+      { icon: Briefcase, label: "Management", path: "/dashboard/management" },
+      { icon: Zap, label: "SaaS", path: "/dashboard/saas" },
       {
-        icon: Package,
-        label: "Product",
-        children: [
-          {
-            icon: Package,
-            label: "Product grid",
-            path: "/ecommerce/product-grid",
-          },
-          {
-            icon: Package,
-            label: "Product grid",
-            path: "/ecommerce/products?view=grid",
-          },
-          {
-            icon: Package,
-            label: "Product details",
-            path: "/ecommerce/products/1",
-          },
-          { icon: Plus, label: "Add product", path: "/ecommerce/add-product" },
-        ],
+        icon: Bell,
+        label: "Support desk",
+        badge: "New",
+        path: "/support/tickets",
       },
+    ],
+  },
+  {
+    icon: Package,
+    label: "App",
+    children: [
+      { icon: Calendar, label: "Calendar", path: "/calendar" },
+      { icon: MessageSquare, label: "Chat", path: "/chat" },
+      { icon: Mail, label: "Email", path: "/email" },
+      { icon: Calendar, label: "Events", path: "/events" },
       {
         icon: ShoppingCart,
-        label: "Orders",
+        label: "E commerce",
         children: [
           {
-            icon: ShoppingCart,
-            label: "Order list",
-            path: "/ecommerce/order-list",
+            icon: Package,
+            label: "Product",
+            children: [
+              {
+                icon: Package,
+                label: "Product list",
+                path: "/ecommerce/products",
+              },
+              {
+                icon: Package,
+                label: "Product grid",
+                path: "/ecommerce/product-grid",
+              },
+              {
+                icon: Package,
+                label: "Product details",
+                path: "/ecommerce/products/1",
+              },
+              {
+                icon: Plus,
+                label: "Add product",
+                path: "/ecommerce/add-product",
+              },
+            ],
           },
           {
             icon: ShoppingCart,
-            label: "Order details",
-            path: "/ecommerce/orders/1",
+            label: "Orders",
+            children: [
+              {
+                icon: ShoppingCart,
+                label: "Order list",
+                path: "/ecommerce/order-list",
+              },
+              {
+                icon: ShoppingCart,
+                label: "Order details",
+                path: "/ecommerce/orders/1",
+              },
+            ],
           },
-        ],
-      },
-      {
-        icon: Users,
-        label: "Customers",
-        children: [
-          { icon: Users, label: "Customer list", path: "/ecommerce/customers" },
           {
             icon: Users,
-            label: "Customer details",
-            path: "/ecommerce/customers/1",
+            label: "Customers",
+            children: [
+              {
+                icon: Users,
+                label: "Customer list",
+                path: "/ecommerce/customers",
+              },
+              {
+                icon: Users,
+                label: "Customer details",
+                path: "/ecommerce/customers/1",
+              },
+            ],
           },
+          { icon: ShoppingCart, label: "Shopping cart", path: "/cart" },
+          { icon: CreditCard, label: "Checkout", path: "/ecommerce/checkout" },
+          { icon: CreditCard, label: "Billing", path: "/ecommerce/billing" },
+          { icon: FileText, label: "Invoice", path: "/ecommerce/invoice/1" },
         ],
       },
-      { icon: ShoppingCart, label: "Shopping cart", path: "/cart" },
-      { icon: CreditCard, label: "Checkout", path: "/ecommerce/checkout" },
-      { icon: CreditCard, label: "Billing", path: "/ecommerce/billing" },
-      { icon: FileText, label: "Invoice", path: "/ecommerce/invoice/1" },
+      { icon: Package, label: "E learning", badge: "New", path: "/elearning" },
+      { icon: FileText, label: "Kanban", path: "/kanban" },
+      { icon: Users, label: "Social", path: "/social" },
+      {
+        icon: Briefcase,
+        label: "Support desk",
+        children: [
+          { icon: Bell, label: "Tickets", path: "/support/tickets" },
+          { icon: Users, label: "Agents", path: "/support/agents" },
+        ],
+      },
     ],
   },
-  { icon: Users, label: "User management", path: "/users" },
-  { icon: Users, label: "Team management", path: "/team" },
   {
-    icon: BarChart3,
-    label: "Analytics",
-    path: "/analytics",
-  },
-  { icon: Package, label: "Product", badge: "New", path: "/products" },
-  { icon: Mail, label: "Email", badge: "6", path: "/email" },
-  { icon: Calendar, label: "Events", path: "/events" },
-  { icon: FileText, label: "Kanban", path: "/kanban" },
-  { icon: MessageSquare, label: "Chat", path: "/chat" },
-  { icon: File, label: "Files", path: "/files" },
-  { icon: CreditCard, label: "Invoices", path: "/invoices" },
-  { icon: Bell, label: "Notifications", badge: "3", path: "/notifications" },
-  { icon: Calendar, label: "Calendar", path: "/calendar" },
-  { icon: FileText, label: "Reports", path: "/reports" },
-  { icon: User, label: "Profile", path: "/profile" },
-  {
-    icon: Briefcase,
-    label: "Support desk",
+    icon: FileText,
+    label: "Pages",
     children: [
-      { icon: Bell, label: "Tickets", path: "/support/tickets" },
-      { icon: Users, label: "Agents", path: "/support/agents" },
+      { icon: Home, label: "Starter", path: "/starter" },
+      { icon: FileText, label: "Landing", path: "/landing" },
+      { icon: Shield, label: "Authentication", path: "/auth" },
+      { icon: User, label: "User", path: "/profile" },
+      { icon: CreditCard, label: "Pricing", path: "/pricing" },
+      { icon: MessageSquare, label: "Faq", path: "/faq" },
+      {
+        icon: Bell,
+        label: "Errors",
+        children: [
+          { icon: Bell, label: "404", path: "/404" },
+          { icon: Bell, label: "500", path: "/500" },
+        ],
+      },
+      { icon: Package, label: "Miscellaneous", path: "/pages/miscellaneous" },
+      { icon: Palette, label: "Layouts", path: "/pages/layouts" },
     ],
   },
-  { icon: Palette, label: "Components", path: "/components" },
-  { icon: Settings, label: "Settings", path: "/settings" },
-  { icon: Shield, label: "Authentication", path: "/auth" },
-  { icon: Zap, label: "Utilities", path: "/utilities" },
+  {
+    icon: Package,
+    label: "Modules",
+    children: [
+      {
+        icon: FileText,
+        label: "Forms",
+        children: [
+          { icon: FileText, label: "Basic", path: "/forms/basic" },
+          { icon: FileText, label: "Advance", path: "/forms/advance" },
+          {
+            icon: FileText,
+            label: "Floating labels",
+            path: "/forms/floating-labels",
+          },
+          { icon: FileText, label: "Wizard", path: "/forms/wizard" },
+          { icon: FileText, label: "Validation", path: "/forms/validation" },
+        ],
+      },
+      { icon: BarChart3, label: "Tables", path: "/tables" },
+      { icon: BarChart3, label: "Charts", path: "/charts" },
+      { icon: Palette, label: "Icons", path: "/icons" },
+      { icon: FileText, label: "Maps", path: "/maps" },
+      { icon: Package, label: "Components", path: "/components" },
+      { icon: Settings, label: "Utilities", path: "/utilities" },
+      { icon: Package, label: "Widgets", path: "/widgets" },
+      { icon: FileText, label: "Multi level", path: "/modules/multi-level" },
+    ],
+  },
+  {
+    icon: FileText,
+    label: "Documentation",
+    children: [
+      {
+        icon: FileText,
+        label: "Getting started",
+        path: "/docs/getting-started",
+      },
+      { icon: Palette, label: "Customization", path: "/docs/customization" },
+      { icon: MessageSquare, label: "Faq", path: "/docs/faq" },
+      { icon: Package, label: "Gulp", path: "/docs/gulp" },
+      { icon: FileText, label: "Design file", path: "/docs/design-file" },
+      { icon: FileText, label: "Changelog", path: "/docs/changelog" },
+    ],
+  },
 ];
 
 interface SideNavigationProps {
@@ -141,9 +225,9 @@ export default function SideNavigation({
   isOpen = true,
   onClose,
 }: SideNavigationProps) {
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   const toggleExpanded = (label: string) => {
     setExpandedItems((prev) =>
@@ -158,15 +242,19 @@ export default function SideNavigation({
     return location.pathname === path;
   };
 
-  const isParentActive = (item: NavItem) => {
+  const isParentActive = (item: NavItem): boolean => {
     if (item.path && isActive(item.path)) return true;
     if (item.children) {
-      return item.children.some((child) => isActive(child.path));
+      return item.children.some((child) => isParentActive(child));
     }
     return false;
   };
 
-  const renderNavItem = (item: NavItem, level = 0, uniqueKey?: string) => {
+  const renderNavItem = (
+    item: NavItem,
+    level = 0,
+    uniqueKey?: string,
+  ): React.ReactNode => {
     const hasChildren = item.children && item.children.length > 0;
     const isExpanded = expandedItems.includes(item.label);
     const itemIsActive = isActive(item.path) || isParentActive(item);
@@ -190,6 +278,7 @@ export default function SideNavigation({
           className={cn(
             "w-full justify-start gap-3 h-10 px-3 text-sm font-medium transition-colors font-poppins",
             level > 0 && "ml-6 w-[calc(100%-24px)]",
+            level > 1 && "ml-12 w-[calc(100%-48px)]",
             itemIsActive
               ? "bg-falcon-blue bg-opacity-10 text-falcon-blue hover:bg-falcon-blue hover:bg-opacity-10"
               : "text-falcon-text-secondary hover:bg-gray-50 hover:text-falcon-text-primary",
@@ -251,12 +340,15 @@ export default function SideNavigation({
             <h1 className="text-xl font-bold text-falcon-blue font-poppins">
               falcon
             </h1>
+            <span className="text-xs text-falcon-text-muted ml-1 font-poppins">
+              v3.23.0
+            </span>
           </div>
 
           {/* Search */}
-          <div className="px-3 py-2">
+          <div className="p-4 pb-2">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-falcon-text-muted" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-falcon-text-muted" />
               <Input
                 placeholder="Search..."
                 className="pl-10 h-9 bg-falcon-bg-light border-0 text-sm placeholder:text-falcon-text-muted font-poppins"
