@@ -71,6 +71,7 @@ import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
 import FAQ from "./pages/FAQ";
 import Pricing from "./pages/Pricing";
+import Landing from "./pages/Landing";
 
 const queryClient = new QueryClient();
 
@@ -582,6 +583,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <FAQ />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/landing"
+            element={
+              <DashboardLayout>
+                <Landing />
               </DashboardLayout>
             }
           />
