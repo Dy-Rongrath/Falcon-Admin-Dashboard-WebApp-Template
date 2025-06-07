@@ -178,7 +178,7 @@ const navigationItems: NavItem[] = [
         label: "Forms",
         children: [
           { icon: FileText, label: "Basic", path: "/forms/basic" },
-          { icon: FileText, label: "Advance", path: "/forms/advance" },
+          { icon: FileText, label: "Advanced", path: "/forms/advanced" },
           {
             icon: FileText,
             label: "Floating labels",
