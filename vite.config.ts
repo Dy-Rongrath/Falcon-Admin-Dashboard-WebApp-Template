@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/Falcon-Admin-Dashboard-WebApp-Template/",
+  base: mode === 'production' ? "/Falcon-Admin-Dashboard-WebApp-Template/" : "/",
   server: {
     host: "::",
     port: 8080,
@@ -14,5 +14,9 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
   },
 }));
