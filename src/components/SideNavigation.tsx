@@ -64,8 +64,24 @@ const navigationItems: NavItem[] = [
     children: [
       { icon: Calendar, label: "Calendar", path: "/calendar" },
       { icon: MessageSquare, label: "Chat", path: "/chat" },
-      { icon: Mail, label: "Email", path: "/email" },
-      { icon: Calendar, label: "Events", path: "/events" },
+      {
+        icon: Mail,
+        label: "Email",
+        children: [
+          { icon: Mail, label: "Inbox", path: "/email" },
+          { icon: Mail, label: "Email detail", path: "/email/detail" },
+          { icon: Mail, label: "Compose", path: "/email/compose" },
+        ],
+      },
+      {
+        icon: Calendar,
+        label: "Events",
+        children: [
+          { icon: Plus, label: "Create an event", path: "/events/create" },
+          { icon: Calendar, label: "Event detail", path: "/events/detail" },
+          { icon: Calendar, label: "Event list", path: "/events" },
+        ],
+      },
       {
         icon: ShoppingCart,
         label: "E commerce",
@@ -118,11 +134,6 @@ const navigationItems: NavItem[] = [
             children: [
               {
                 icon: Users,
-                label: "Customer list",
-                path: "/ecommerce/customers",
-              },
-              {
-                icon: Users,
                 label: "Customer details",
                 path: "/ecommerce/customers/1",
               },
@@ -134,15 +145,67 @@ const navigationItems: NavItem[] = [
           { icon: FileText, label: "Invoice", path: "/ecommerce/invoice/1" },
         ],
       },
-      { icon: Package, label: "E learning", badge: "New", path: "/elearning" },
+      {
+        icon: Package,
+        label: "E learning",
+        badge: "New",
+        children: [
+          {
+            icon: Package,
+            label: "Course",
+            children: [
+              {
+                icon: Package,
+                label: "Course list",
+                path: "/elearning/courses",
+              },
+              {
+                icon: Package,
+                label: "Course grid",
+                path: "/elearning/course-grid",
+              },
+              {
+                icon: Package,
+                label: "Course details",
+                path: "/elearning/courses/1",
+              },
+              {
+                icon: Plus,
+                label: "Create a course",
+                path: "/elearning/create-course",
+              },
+            ],
+          },
+          {
+            icon: Users,
+            label: "Student overview",
+            path: "/elearning/students",
+          },
+          { icon: User, label: "Trainer profile", path: "/elearning/trainer" },
+        ],
+      },
       { icon: FileText, label: "Kanban", path: "/kanban" },
-      { icon: Users, label: "Social", path: "/social" },
+      {
+        icon: Users,
+        label: "Social",
+        children: [
+          { icon: Users, label: "Feed", path: "/social" },
+          { icon: FileText, label: "Activity log", path: "/social/activity" },
+          { icon: Bell, label: "Notifications", path: "/notifications" },
+          { icon: Users, label: "Followers", path: "/social/followers" },
+        ],
+      },
       {
         icon: Briefcase,
         label: "Support desk",
         children: [
-          { icon: Bell, label: "Tickets", path: "/support/tickets" },
-          { icon: Users, label: "Agents", path: "/support/agents" },
+          { icon: BarChart3, label: "Table view", path: "/support/tickets" },
+          { icon: Package, label: "Card view", path: "/support/cards" },
+          { icon: Users, label: "Contacts", path: "/support/contacts" },
+          { icon: User, label: "Contact details", path: "/support/contacts/1" },
+          { icon: Bell, label: "Tickets preview", path: "/support/preview" },
+          { icon: FileText, label: "Quick links", path: "/support/links" },
+          { icon: BarChart3, label: "Reports", path: "/support/reports" },
         ],
       },
     ],
