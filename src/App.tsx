@@ -30,6 +30,8 @@ import DashboardAnalytics from "./pages/dashboard/Analytics";
 import Management from "./pages/dashboard/Management";
 import SaaS from "./pages/dashboard/SaaS";
 import DashboardSupportDesk from "./pages/dashboard/SupportDesk";
+import CRM from "./pages/dashboard/CRM";
+import LMS from "./pages/dashboard/LMS";
 import BasicForms from "./pages/forms/Basic";
 import AdvancedForms from "./pages/forms/Advanced";
 import FloatingLabelsForms from "./pages/forms/FloatingLabels";
@@ -234,6 +236,22 @@ const App = () => (
             element={
               <DashboardLayout>
                 <DashboardAnalytics />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/dashboard/crm"
+            element={
+              <DashboardLayout>
+                <CRM />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/dashboard/lms"
+            element={
+              <DashboardLayout>
+                <LMS />
               </DashboardLayout>
             }
           />
