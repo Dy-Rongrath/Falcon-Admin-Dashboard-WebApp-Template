@@ -49,6 +49,7 @@ const navigationItems: NavItem[] = [
     ],
   },
   { icon: Users, label: "User management", path: "/users" },
+  { icon: Users, label: "Team management", path: "/team" },
   {
     icon: BarChart3,
     label: "Analytics",
