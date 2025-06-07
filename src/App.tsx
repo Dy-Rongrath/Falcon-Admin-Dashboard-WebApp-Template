@@ -16,6 +16,7 @@ import ProductGrid from "./pages/ecommerce/ProductGrid";
 import ProductDetails from "./pages/ecommerce/ProductDetails";
 import AddProduct from "./pages/ecommerce/AddProduct";
 import Orders from "./pages/ecommerce/Orders";
+import OrderList from "./pages/ecommerce/OrderList";
 import OrderDetails from "./pages/ecommerce/OrderDetails";
 import Customers from "./pages/ecommerce/Customers";
 import CustomerDetails from "./pages/ecommerce/CustomerDetails";
@@ -120,6 +121,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Orders />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/order-list"
+            element={
+              <DashboardLayout>
+                <OrderList />
               </DashboardLayout>
             }
           />
