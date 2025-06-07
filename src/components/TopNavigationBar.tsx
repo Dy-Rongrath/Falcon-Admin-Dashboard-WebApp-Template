@@ -28,7 +28,7 @@ export default function TopNavigationBar() {
   const [isDark, setIsDark] = useState(false);
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6">
+    <header className="h-16 bg-white border-b border-falcon-border-light flex items-center justify-between px-6">
       {/* Left Section */}
       <div className="flex items-center gap-4">
         {/* Mobile menu button */}
@@ -38,10 +38,10 @@ export default function TopNavigationBar() {
 
         {/* Search */}
         <div className="relative hidden sm:block">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-falcon-text-muted" />
           <Input
             placeholder="Search..."
-            className="pl-10 w-80 h-9 bg-slate-50 border-0 text-sm placeholder:text-slate-500"
+            className="pl-10 w-80 h-9 bg-falcon-bg-light border-0 text-sm placeholder:text-falcon-text-muted font-poppins"
           />
         </div>
       </div>
@@ -53,34 +53,32 @@ export default function TopNavigationBar() {
           variant="ghost"
           size="sm"
           onClick={() => setIsDark(!isDark)}
-          className="h-9 w-9 p-0"
+          className="text-falcon-text-secondary hover:text-falcon-text-primary"
         >
-          {isDark ? (
-            <Sun className="h-4 w-4 text-slate-600" />
-          ) : (
-            <Moon className="h-4 w-4 text-slate-600" />
-          )}
+          {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </Button>
 
         {/* Shopping Cart */}
-        <Button variant="ghost" size="sm" className="h-9 w-9 p-0 relative">
-          <ShoppingCart className="h-4 w-4 text-slate-600" />
-          <Badge
-            variant="destructive"
-            className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs flex items-center justify-center"
-          >
-            3
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative text-falcon-text-secondary hover:text-falcon-text-primary"
+        >
+          <ShoppingCart className="h-4 w-4" />
+          <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs bg-falcon-blue hover:bg-falcon-blue">
+            2
           </Badge>
         </Button>
 
         {/* Notifications */}
-        <Button variant="ghost" size="sm" className="h-9 w-9 p-0 relative">
-          <Bell className="h-4 w-4 text-slate-600" />
-          <Badge
-            variant="destructive"
-            className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs flex items-center justify-center"
-          >
-            2
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative text-falcon-text-secondary hover:text-falcon-text-primary"
+        >
+          <Bell className="h-4 w-4" />
+          <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs bg-falcon-orange hover:bg-falcon-orange">
+            5
           </Badge>
         </Button>
 
