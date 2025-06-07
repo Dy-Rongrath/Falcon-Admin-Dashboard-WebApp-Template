@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -23,6 +26,11 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Configure git
+        run: |
+          git config --global user.email "dyrongrath@gmail.com"
+          git config --global user.name "Dy-Rongrath@users.noreply.github.com"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
