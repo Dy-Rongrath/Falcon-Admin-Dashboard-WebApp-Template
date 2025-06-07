@@ -124,23 +124,16 @@ export default function SideNavigation() {
         <Button
           variant="ghost"
           className={cn(
-            "w-full justify-start gap-3 h-10 px-3 text-sm font-medium transition-colors",
+            "w-full justify-start gap-3 h-10 px-3 text-sm font-medium transition-colors font-poppins",
             level > 0 && "ml-6 w-[calc(100%-24px)]",
             itemIsActive
-              ? "hover:bg-blue-50 hover:text-blue-600"
-              : "hover:bg-slate-50",
+              ? "bg-blue-50 text-blue-600 hover:bg-blue-50 hover:text-blue-600"
+              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
           )}
-          style={{
-            backgroundColor: itemIsActive ? '#EDF2F9' : 'transparent',
-            color: itemIsActive ? '#2C7BE5' : '#4D5969',
-            fontFamily: 'Poppins, sans-serif',
-            fontWeight: '500'
-          }}
           onClick={handleClick}
         >
           <item.icon
-            className="h-4 w-4 shrink-0"
-            style={{ color: itemIsActive ? '#2C7BE5' : '#4D5969' }}
+            className={cn("h-4 w-4 shrink-0", itemIsActive && "text-blue-600")}
           />
           <span className="flex-1 text-left">{item.label}</span>
           {item.badge && (
@@ -173,26 +166,21 @@ export default function SideNavigation() {
   };
 
   return (
-    <div className="fixed left-0 top-0 z-40 h-screen w-64 bg-white" style={{ borderRight: '1px solid #D8E2EF' }}>
+    <div className="fixed left-0 top-0 z-40 h-screen w-64 bg-white border-r border-gray-200">
       <ScrollArea className="h-full">
         <div className="flex h-full max-h-screen flex-col gap-2">
           {/* Logo */}
-          <div className="flex h-16 items-center px-6" style={{ borderBottom: '1px solid #D8E2EF' }}>
-            <h1 className="text-xl font-bold" style={{ color: '#2C7BE5', fontFamily: 'Poppins, sans-serif' }}>falcon</h1>
+          <div className="flex h-16 items-center border-b border-gray-200 px-6">
+            <h1 className="text-xl font-bold text-blue-600 font-poppins">falcon</h1>
           </div>
 
           {/* Search */}
           <div className="px-3 py-2">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" style={{ color: '#9DA9BB' }} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="Search..."
-                className="pl-10 h-9 border-0 text-sm"
-                style={{
-                  backgroundColor: '#EDF2F9',
-                  color: '#344050',
-                  fontFamily: 'Poppins, sans-serif'
-                }}
+                className="pl-10 h-9 bg-gray-50 border-0 text-sm placeholder:text-gray-500 font-poppins"
               />
             </div>
           </div>
