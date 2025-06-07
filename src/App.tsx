@@ -74,6 +74,7 @@ import Pricing from "./pages/Pricing";
 import Landing from "./pages/Landing";
 import EmailDetail from "./pages/email/EmailDetail";
 import EmailCompose from "./pages/email/EmailCompose";
+import CourseList from "./pages/elearning/CourseList";
 
 const queryClient = new QueryClient();
 
@@ -527,6 +528,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <ELearning />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/elearning/courses"
+            element={
+              <DashboardLayout>
+                <CourseList />
               </DashboardLayout>
             }
           />
