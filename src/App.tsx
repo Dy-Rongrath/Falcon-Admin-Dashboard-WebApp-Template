@@ -26,6 +26,12 @@ import Invoice from "./pages/ecommerce/Invoice";
 import UserManagement from "./pages/UserManagement";
 import TeamManagement from "./pages/TeamManagement";
 import Analytics from "./pages/Analytics";
+import DashboardAnalytics from "./pages/dashboard/Analytics";
+import Management from "./pages/dashboard/Management";
+import SaaS from "./pages/dashboard/SaaS";
+import DashboardSupportDesk from "./pages/dashboard/SupportDesk";
+import BasicForms from "./pages/forms/Basic";
+import AdvancedForms from "./pages/forms/Advanced";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
 import Settings from "./pages/Settings";
@@ -217,6 +223,54 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Analytics />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/dashboard/analytics"
+            element={
+              <DashboardLayout>
+                <DashboardAnalytics />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/dashboard/management"
+            element={
+              <DashboardLayout>
+                <Management />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/dashboard/saas"
+            element={
+              <DashboardLayout>
+                <SaaS />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/dashboard/support-desk"
+            element={
+              <DashboardLayout>
+                <DashboardSupportDesk />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/forms/basic"
+            element={
+              <DashboardLayout>
+                <BasicForms />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/forms/advanced"
+            element={
+              <DashboardLayout>
+                <AdvancedForms />
               </DashboardLayout>
             }
           />
