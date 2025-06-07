@@ -557,6 +557,8 @@ const App = () => (
               </DashboardLayout>
             }
           />
+          <Route path="/404" element={<Error404 />} />
+          <Route path="/500" element={<Error500 />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
