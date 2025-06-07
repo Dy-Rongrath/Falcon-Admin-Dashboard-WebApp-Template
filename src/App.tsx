@@ -35,6 +35,13 @@ import Notifications from "./pages/Notifications";
 import Calendar from "./pages/Calendar";
 import Reports from "./pages/Reports";
 import Cart from "./pages/Cart";
+import ELearning from "./pages/ELearning";
+import Social from "./pages/Social";
+import Charts from "./pages/Charts";
+import Icons from "./pages/Icons";
+import Maps from "./pages/Maps";
+import Widgets from "./pages/Widgets";
+import Starter from "./pages/Starter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -273,6 +280,62 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Cart />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/elearning"
+            element={
+              <DashboardLayout>
+                <ELearning />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/social"
+            element={
+              <DashboardLayout>
+                <Social />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/charts"
+            element={
+              <DashboardLayout>
+                <Charts />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/icons"
+            element={
+              <DashboardLayout>
+                <Icons />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/maps"
+            element={
+              <DashboardLayout>
+                <Maps />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/widgets"
+            element={
+              <DashboardLayout>
+                <Widgets />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/starter"
+            element={
+              <DashboardLayout>
+                <Starter />
               </DashboardLayout>
             }
           />
