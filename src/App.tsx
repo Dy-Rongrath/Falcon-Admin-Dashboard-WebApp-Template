@@ -75,6 +75,7 @@ import Landing from "./pages/Landing";
 import EmailDetail from "./pages/email/EmailDetail";
 import EmailCompose from "./pages/email/EmailCompose";
 import CourseList from "./pages/elearning/CourseList";
+import CourseGrid from "./pages/elearning/CourseGrid";
 
 const queryClient = new QueryClient();
 
@@ -536,6 +537,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <CourseList />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/elearning/course-grid"
+            element={
+              <DashboardLayout>
+                <CourseGrid />
               </DashboardLayout>
             }
           />
