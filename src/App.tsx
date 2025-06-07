@@ -21,6 +21,7 @@ import Settings from "./pages/Settings";
 import StandaloneProducts from "./pages/Products";
 import Events from "./pages/Events";
 import SupportDesk from "./pages/support/SupportDesk";
+import SupportAgents from "./pages/support/Agents";
 import Authentication from "./pages/Authentication";
 import Utilities from "./pages/Utilities";
 import FileManager from "./pages/FileManager";
@@ -155,6 +156,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <SupportDesk />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/agents"
+            element={
+              <DashboardLayout>
+                <SupportAgents />
               </DashboardLayout>
             }
           />
