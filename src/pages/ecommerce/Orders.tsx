@@ -69,7 +69,7 @@ const mockOrders: Order[] = [
     customer: {
       name: "John Smith",
       email: "john.smith@email.com",
-      avatar: "/api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
     },
     items: 3,
     total: 1249.97,
@@ -85,7 +85,7 @@ const mockOrders: Order[] = [
     customer: {
       name: "Sarah Johnson",
       email: "sarah.j@email.com",
-      avatar: "/api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
     },
     items: 1,
     total: 899.99,
@@ -101,7 +101,7 @@ const mockOrders: Order[] = [
     customer: {
       name: "Michael Brown",
       email: "m.brown@email.com",
-      avatar: "/api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
     },
     items: 2,
     total: 649.98,
@@ -117,7 +117,7 @@ const mockOrders: Order[] = [
     customer: {
       name: "Emily Davis",
       email: "emily.davis@email.com",
-      avatar: "/api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
     },
     items: 1,
     total: 299.99,
@@ -133,7 +133,7 @@ const mockOrders: Order[] = [
     customer: {
       name: "David Wilson",
       email: "d.wilson@email.com",
-      avatar: "/api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
     },
     items: 4,
     total: 1899.96,
@@ -149,7 +149,7 @@ const mockOrders: Order[] = [
     customer: {
       name: "Lisa Anderson",
       email: "lisa.a@email.com",
-      avatar: "/api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
     },
     items: 2,
     total: 1199.98,
