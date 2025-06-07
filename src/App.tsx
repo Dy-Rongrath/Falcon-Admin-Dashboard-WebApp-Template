@@ -36,6 +36,7 @@ import BasicForms from "./pages/forms/Basic";
 import AdvancedForms from "./pages/forms/Advanced";
 import FloatingLabelsForms from "./pages/forms/FloatingLabels";
 import WizardForms from "./pages/forms/Wizard";
+import ValidationForms from "./pages/forms/Validation";
 import TablesModule from "./pages/modules/Tables";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
@@ -308,6 +309,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <WizardForms />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/forms/validation"
+            element={
+              <DashboardLayout>
+                <ValidationForms />
               </DashboardLayout>
             }
           />
