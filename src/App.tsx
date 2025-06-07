@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import SideNavigation from "@/components/SideNavigation";
 import TopNavigationBar from "@/components/TopNavigationBar";
 import CustomizeButton from "@/components/CustomizeButton";
@@ -38,17 +39,34 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 // Layout component for pages with sidebar
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="min-h-screen bg-falcon-bg-light flex">
-    <SideNavigation />
-    <div className="flex-1 ml-64 flex flex-col">
-      <TopNavigationBar />
-      <main className="flex-1 p-6">{children}</main>
-      <Footer />
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-falcon-bg-light flex">
+      <SideNavigation
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+      <div className="flex-1 lg:ml-64 flex flex-col">
+        <TopNavigationBar
+          onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+        />
+        <main className="flex-1 p-6">{children}</main>
+        <Footer />
+      </div>
+      <CustomizeButton />
+
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
     </div>
-    <CustomizeButton />
-  </div>
-);
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
