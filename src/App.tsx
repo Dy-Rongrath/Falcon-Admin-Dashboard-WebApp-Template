@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 // Pages
 import Index from "./pages/Index";
 import Products from "./pages/ecommerce/Products";
+import ProductGrid from "./pages/ecommerce/ProductGrid";
 import ProductDetails from "./pages/ecommerce/ProductDetails";
 import AddProduct from "./pages/ecommerce/AddProduct";
 import Orders from "./pages/ecommerce/Orders";
@@ -103,6 +104,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Products />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/product-grid"
+            element={
+              <DashboardLayout>
+                <ProductGrid />
               </DashboardLayout>
             }
           />
