@@ -188,7 +188,7 @@ const navigationItems: NavItem[] = [
           { icon: FileText, label: "Validation", path: "/forms/validation" },
         ],
       },
-      { icon: BarChart3, label: "Tables", path: "/tables" },
+      { icon: BarChart3, label: "Tables", path: "/modules/tables" },
       { icon: BarChart3, label: "Charts", path: "/charts" },
       { icon: Palette, label: "Icons", path: "/icons" },
       { icon: FileText, label: "Maps", path: "/maps" },
