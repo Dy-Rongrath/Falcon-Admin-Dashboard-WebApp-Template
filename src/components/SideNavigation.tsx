@@ -43,9 +43,56 @@ const navigationItems: NavItem[] = [
     icon: ShoppingCart,
     label: "E commerce",
     children: [
-      { icon: Package, label: "Products", path: "/ecommerce/products" },
-      { icon: ShoppingCart, label: "Orders", path: "/ecommerce/orders" },
-      { icon: Users, label: "Customers", path: "/ecommerce/customers" },
+      {
+        icon: Package,
+        label: "Product",
+        children: [
+          { icon: Package, label: "Product list", path: "/ecommerce/products" },
+          {
+            icon: Package,
+            label: "Product grid",
+            path: "/ecommerce/products?view=grid",
+          },
+          {
+            icon: Package,
+            label: "Product details",
+            path: "/ecommerce/products/1",
+          },
+          { icon: Plus, label: "Add product", path: "/ecommerce/add-product" },
+        ],
+      },
+      {
+        icon: ShoppingCart,
+        label: "Orders",
+        children: [
+          {
+            icon: ShoppingCart,
+            label: "Order list",
+            path: "/ecommerce/orders",
+          },
+          {
+            icon: ShoppingCart,
+            label: "Order details",
+            path: "/ecommerce/orders/1",
+          },
+        ],
+      },
+      {
+        icon: Users,
+        label: "Customers",
+        children: [
+          { icon: Users, label: "Customer list", path: "/ecommerce/customers" },
+          {
+            icon: Users,
+            label: "Customer details",
+            path: "/ecommerce/customers/1",
+          },
+        ],
+      },
+      { icon: ShoppingCart, label: "Shopping cart", path: "/cart" },
+      { icon: CreditCard, label: "Checkout", path: "/ecommerce/checkout" },
+      { icon: CreditCard, label: "Billing", path: "/ecommerce/billing" },
+      { icon: FileText, label: "Invoice", path: "/ecommerce/invoice/1" },
     ],
   },
   { icon: Users, label: "User management", path: "/users" },
