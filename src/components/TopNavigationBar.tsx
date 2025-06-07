@@ -291,7 +291,7 @@ export default function TopNavigationBar({
               className="h-9 px-2 gap-2 hover:bg-falcon-bg-light transition-colors"
             >
               <Avatar className="h-7 w-7">
-                <AvatarImage src={`${import.meta.env.BASE_URL}/placeholder/32/32`}alt="User" />
+                <AvatarImage src={`${import.meta.env.BASE_URL}placeholder/32/32`}alt="User" />
                 <AvatarFallback className="bg-falcon-blue bg-opacity-10 text-falcon-blue text-xs font-medium">
                   JD
                 </AvatarFallback>
