@@ -51,6 +51,15 @@ export default function TopProductsChart() {
                 height={80}
                 type="category"
                 interval={0}
+                allowDataOverflow={false}
+                allowDecimals={true}
+                allowDuplicatedCategory={true}
+                scale="auto"
+                tickCount={undefined}
+                minTickGap={5}
+                mirror={false}
+                reversed={false}
+                hide={false}
               />
               <YAxis
                 yAxisId="sales"
@@ -65,6 +74,15 @@ export default function TopProductsChart() {
                 }}
                 type="number"
                 domain={["dataMin", "dataMax"]}
+                allowDataOverflow={false}
+                allowDecimals={true}
+                allowDuplicatedCategory={true}
+                scale="auto"
+                tickCount={undefined}
+                minTickGap={5}
+                mirror={false}
+                reversed={false}
+                hide={false}
               />
               <YAxis
                 yAxisId="revenue"
@@ -79,6 +97,15 @@ export default function TopProductsChart() {
                 }}
                 type="number"
                 domain={["dataMin", "dataMax"]}
+                allowDataOverflow={false}
+                allowDecimals={true}
+                allowDuplicatedCategory={true}
+                scale="auto"
+                tickCount={undefined}
+                minTickGap={5}
+                mirror={false}
+                reversed={false}
+                hide={false}
               />
               <Tooltip
                 contentStyle={{

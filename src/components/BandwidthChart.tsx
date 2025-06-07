@@ -70,6 +70,12 @@ export default function BandwidthChart() {
                 allowDataOverflow={false}
                 allowDecimals={true}
                 allowDuplicatedCategory={true}
+                scale="auto"
+                tickCount={undefined}
+                minTickGap={5}
+                mirror={false}
+                reversed={false}
+                hide={false}
               />
               <YAxis
                 axisLine={false}
@@ -81,6 +87,13 @@ export default function BandwidthChart() {
                 allowDataOverflow={false}
                 allowDecimals={true}
                 allowDuplicatedCategory={true}
+                scale="auto"
+                tickCount={undefined}
+                minTickGap={5}
+                mirror={false}
+                reversed={false}
+                hide={false}
+                orientation="left"
               />
               <Tooltip
                 contentStyle={{
