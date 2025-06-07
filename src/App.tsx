@@ -278,6 +278,30 @@ const App = () => (
             }
           />
           <Route
+            path="/forms/floating-labels"
+            element={
+              <DashboardLayout>
+                <FloatingLabelsForms />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/forms/wizard"
+            element={
+              <DashboardLayout>
+                <WizardForms />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/modules/tables"
+            element={
+              <DashboardLayout>
+                <TablesModule />
+              </DashboardLayout>
+            }
+          />
+          <Route
             path="/email"
             element={
               <DashboardLayout>
