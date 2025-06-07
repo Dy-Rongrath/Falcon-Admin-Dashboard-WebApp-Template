@@ -11,6 +11,11 @@ import {
   MapPin,
   Clock,
   AlertTriangle,
+  BarChart3,
+  Package,
+  ShoppingCart,
+  Users,
+  Settings,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -22,7 +27,6 @@ export default function Error404() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      // In a real app, you'd implement search functionality
       console.log("Searching for:", searchTerm);
     }
   };
@@ -35,6 +39,19 @@ export default function Error404() {
     { name: "Users", path: "/users", icon: Users },
     { name: "Settings", path: "/settings", icon: Settings },
   ];
+
+  // Fix: Use navigate instead of window.location
+  const handleGoHome = () => {
+    navigate("/");
+  };
+
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-falcon-bg-light flex items-center justify-center p-6">
@@ -60,10 +77,10 @@ export default function Error404() {
             moved, deleted, or you entered the wrong URL.
           </p>
 
-          {/* Action Buttons */}
+          {/* Action Buttons - Fixed */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button
-              onClick={() => navigate(-1)}
+              onClick={handleGoBack}
               variant="outline"
               className="font-poppins"
             >
@@ -71,11 +88,11 @@ export default function Error404() {
               Go Back
             </Button>
             <Button
-              onClick={() => navigate("/")}
+              onClick={handleGoHome}
               className="bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90 font-poppins"
             >
               <Home className="mr-2 h-4 w-4" />
-              Go Home
+              Return Home
             </Button>
             <Button
               onClick={() => window.location.reload()}
@@ -117,7 +134,7 @@ export default function Error404() {
           </CardContent>
         </Card>
 
-        {/* Popular Pages */}
+        {/* Popular Pages - Fixed */}
         <Card className="border-falcon-border-light mb-8">
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold text-falcon-text-primary font-poppins mb-6 text-center">
@@ -153,7 +170,11 @@ export default function Error404() {
                 Our support team is here to assist you with any questions or
                 issues.
               </p>
-              <Button variant="outline" className="font-poppins">
+              <Button
+                variant="outline"
+                className="font-poppins"
+                onClick={() => navigate("/support")}
+              >
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Contact Support
               </Button>
@@ -172,7 +193,11 @@ export default function Error404() {
                 Found a broken link or experiencing technical difficulties? Let
                 us know.
               </p>
-              <Button variant="outline" className="font-poppins">
+              <Button
+                variant="outline"
+                className="font-poppins"
+                onClick={() => navigate("/support/report")}
+              >
                 <Mail className="mr-2 h-4 w-4" />
                 Report Issue
               </Button>
