@@ -12,8 +12,15 @@ import Footer from "@/components/Footer";
 // Pages
 import Index from "./pages/Index";
 import Products from "./pages/ecommerce/Products";
+import ProductDetails from "./pages/ecommerce/ProductDetails";
+import AddProduct from "./pages/ecommerce/AddProduct";
 import Orders from "./pages/ecommerce/Orders";
+import OrderDetails from "./pages/ecommerce/OrderDetails";
 import Customers from "./pages/ecommerce/Customers";
+import CustomerDetails from "./pages/ecommerce/CustomerDetails";
+import Checkout from "./pages/ecommerce/Checkout";
+import Billing from "./pages/ecommerce/Billing";
+import Invoice from "./pages/ecommerce/Invoice";
 import UserManagement from "./pages/UserManagement";
 import TeamManagement from "./pages/TeamManagement";
 import Analytics from "./pages/Analytics";
@@ -112,6 +119,62 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Customers />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/products/:id"
+            element={
+              <DashboardLayout>
+                <ProductDetails />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/add-product"
+            element={
+              <DashboardLayout>
+                <AddProduct />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/orders/:id"
+            element={
+              <DashboardLayout>
+                <OrderDetails />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/customers/:id"
+            element={
+              <DashboardLayout>
+                <CustomerDetails />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/checkout"
+            element={
+              <DashboardLayout>
+                <Checkout />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/billing"
+            element={
+              <DashboardLayout>
+                <Billing />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/ecommerce/invoice/:id"
+            element={
+              <DashboardLayout>
+                <Invoice />
               </DashboardLayout>
             }
           />
