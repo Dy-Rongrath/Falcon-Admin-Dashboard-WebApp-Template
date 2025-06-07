@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,527 +10,585 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  Trello,
   Plus,
   MoreHorizontal,
+  Star,
+  Users,
   Calendar,
   MessageSquare,
   Paperclip,
-  Flag,
-  Users,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  Star,
-  Archive,
-  Edit,
-  Trash2,
+  CheckSquare,
   Filter,
-  Search,
-  User,
+  Share,
+  Bell,
+  Archive,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface Task {
+interface TaskCard {
   id: string;
   title: string;
-  description: string;
-  priority: "low" | "medium" | "high" | "urgent";
-  status: "todo" | "in_progress" | "review" | "done";
+  coverImage?: string;
+  badges: {
+    text: string;
+    color: "green" | "blue" | "cyan" | "red" | "gray" | "purple";
+  }[];
+  checklist?: {
+    completed: number;
+    total: number;
+  };
+  attachments?: number;
+  comments?: number;
   assignees: {
     id: string;
     name: string;
     avatar: string;
   }[];
-  dueDate: string;
-  tags: string[];
-  attachments: number;
-  comments: number;
-  progress: number;
-  createdAt: string;
+  dueDate?: string;
 }
 
-interface Column {
+interface KanbanColumn {
   id: string;
   title: string;
-  color: string;
-  tasks: Task[];
-  limit?: number;
+  cards: TaskCard[];
 }
 
-const mockTasks: Task[] = [
+const mockTeamMembers = [
   {
     id: "1",
-    title: "Design new landing page",
-    description:
-      "Create a modern and responsive landing page for the new product launch",
-    priority: "high",
-    status: "todo",
-    assignees: [
-      { id: "1", name: "Sarah Johnson", avatar: "/api/placeholder/32/32" },
-      { id: "2", name: "Mike Chen", avatar: "/api/placeholder/32/32" },
-    ],
-    dueDate: "2024-02-20",
-    tags: ["Design", "Frontend"],
-    attachments: 3,
-    comments: 5,
-    progress: 0,
-    createdAt: "2024-02-15",
+    name: "Ashley Garrett",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b647?w=40&h=40&fit=crop&crop=face",
   },
   {
     id: "2",
-    title: "API Integration",
-    description: "Integrate with the new payment gateway API",
-    priority: "urgent",
-    status: "in_progress",
-    assignees: [
-      { id: "3", name: "Alex Rodriguez", avatar: "/api/placeholder/32/32" },
-    ],
-    dueDate: "2024-02-18",
-    tags: ["Backend", "API"],
-    attachments: 1,
-    comments: 8,
-    progress: 65,
-    createdAt: "2024-02-12",
+    name: "Olivia Smith",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
   },
   {
     id: "3",
-    title: "User Testing",
-    description: "Conduct usability testing for the new features",
-    priority: "medium",
-    status: "review",
-    assignees: [
-      { id: "4", name: "Emma Wilson", avatar: "/api/placeholder/32/32" },
-      { id: "5", name: "David Lee", avatar: "/api/placeholder/32/32" },
-    ],
-    dueDate: "2024-02-22",
-    tags: ["Testing", "UX"],
-    attachments: 0,
-    comments: 3,
-    progress: 90,
-    createdAt: "2024-02-10",
+    name: "Michael Johnson",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
   },
   {
     id: "4",
-    title: "Database Migration",
-    description: "Migrate user data to the new database schema",
-    priority: "high",
-    status: "done",
-    assignees: [
-      { id: "6", name: "Lisa Chen", avatar: "/api/placeholder/32/32" },
-    ],
-    dueDate: "2024-02-16",
-    tags: ["Backend", "Database"],
-    attachments: 2,
-    comments: 12,
-    progress: 100,
-    createdAt: "2024-02-08",
+    name: "Sarah Wilson",
+    avatar:
+      "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=40&h=40&fit=crop&crop=face",
   },
   {
     id: "5",
-    title: "Mobile App Optimization",
-    description: "Optimize mobile app performance and fix memory leaks",
-    priority: "medium",
-    status: "todo",
-    assignees: [
-      { id: "7", name: "John Smith", avatar: "/api/placeholder/32/32" },
-    ],
-    dueDate: "2024-02-25",
-    tags: ["Mobile", "Performance"],
-    attachments: 0,
-    comments: 2,
-    progress: 0,
-    createdAt: "2024-02-14",
-  },
-  {
-    id: "6",
-    title: "Security Audit",
-    description: "Perform comprehensive security audit of the application",
-    priority: "urgent",
-    status: "in_progress",
-    assignees: [
-      { id: "8", name: "Maria Garcia", avatar: "/api/placeholder/32/32" },
-      { id: "9", name: "Tom Wilson", avatar: "/api/placeholder/32/32" },
-    ],
-    dueDate: "2024-02-19",
-    tags: ["Security", "Audit"],
-    attachments: 5,
-    comments: 15,
-    progress: 40,
-    createdAt: "2024-02-11",
+    name: "David Brown",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
   },
 ];
 
-const initialColumns: Column[] = [
+const initialColumns: KanbanColumn[] = [
   {
-    id: "todo",
-    title: "To Do",
-    color: "bg-gray-100",
-    tasks: mockTasks.filter((task) => task.status === "todo"),
-    limit: 10,
+    id: "documentation",
+    title: "Documentation",
+    cards: [
+      {
+        id: "doc1",
+        title: "👌",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc2",
+        title: "👇",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc3",
+        title: "➕",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc4",
+        title: "Hovering on the cards",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc5",
+        title: "At the top of the board, click ⭐",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc6",
+        title: "🙋 Add members to the board by clicking",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc7",
+        title: "📃 Add more lists to this board by clicking",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "doc8",
+        title: "Click the meatball (...)",
+        badges: [],
+        assignees: [],
+      },
+    ],
   },
   {
-    id: "in_progress",
-    title: "In Progress",
-    color: "bg-falcon-blue bg-opacity-10",
-    tasks: mockTasks.filter((task) => task.status === "in_progress"),
-    limit: 5,
+    id: "doing",
+    title: "Doing",
+    cards: [
+      {
+        id: "doing1",
+        title: "Add a cookie notice to make the website GDPR compliant",
+        badges: [],
+        checklist: { completed: 3, total: 6 },
+        assignees: [mockTeamMembers[0]],
+      },
+      {
+        id: "doing2",
+        title: "Add a pdf file that describes how to use the website",
+        badges: [],
+        coverImage:
+          "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=300&h=120&fit=crop",
+        attachments: 1,
+        assignees: [mockTeamMembers[1], mockTeamMembers[2]],
+      },
+      {
+        id: "doing3",
+        title: "Make a Registration form using the design from attachment",
+        badges: [
+          { text: "New", color: "green" },
+          { text: "Goal", color: "blue" },
+        ],
+        assignees: [],
+      },
+      {
+        id: "doing4",
+        title: "Update profile page layout according to the new wireframes",
+        badges: [{ text: "Enhancement", color: "cyan" }],
+        assignees: [],
+      },
+    ],
   },
   {
     id: "review",
     title: "Review",
-    color: "bg-falcon-orange bg-opacity-10",
-    tasks: mockTasks.filter((task) => task.status === "review"),
-    limit: 3,
+    cards: [
+      {
+        id: "review1",
+        title: "Update all the npm packages to the latest versions",
+        badges: [{ text: "bug", color: "red" }],
+        checklist: { completed: 5, total: 5 },
+        assignees: [mockTeamMembers[3], mockTeamMembers[4]],
+      },
+      {
+        id: "review2",
+        title:
+          "Add a getting started page that explaining the purpose of the template",
+        badges: [{ text: "Documentation", color: "gray" }],
+        assignees: [],
+      },
+      {
+        id: "review3",
+        title: "Review and test all the task assigned to this milestone",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "review4",
+        title: "Get all the data by API call instead of JSON files",
+        badges: [{ text: "New", color: "green" }],
+        assignees: [],
+      },
+    ],
   },
   {
-    id: "done",
-    title: "Done",
-    color: "bg-falcon-green bg-opacity-10",
-    tasks: mockTasks.filter((task) => task.status === "done"),
+    id: "release",
+    title: "Release",
+    cards: [
+      {
+        id: "release1",
+        title: "Add a new illustration to the landing page hero section",
+        badges: [],
+        coverImage:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=120&fit=crop",
+        attachments: 2,
+        assignees: [mockTeamMembers[0], mockTeamMembers[2], mockTeamMembers[4]],
+      },
+      {
+        id: "release2",
+        title: "Design a new E-commerce template using the new color palette",
+        badges: [{ text: "Goal", color: "blue" }],
+        assignees: [],
+      },
+      {
+        id: "release3",
+        title: "Make a weather app design for mobile and tablet",
+        badges: [],
+        assignees: [],
+      },
+      {
+        id: "release4",
+        title: "List all the Frequently Asked Questions for easy onboarding",
+        badges: [{ text: "Documentation", color: "gray" }],
+        assignees: [],
+      },
+      {
+        id: "release5",
+        title:
+          "Remove all the warning from dev dependencies and make it production ready",
+        badges: [],
+        assignees: [],
+      },
+    ],
   },
 ];
 
+const badgeColors = {
+  green: "bg-green-100 text-green-800 border-green-200",
+  blue: "bg-blue-100 text-blue-800 border-blue-200",
+  cyan: "bg-cyan-100 text-cyan-800 border-cyan-200",
+  red: "bg-red-100 text-red-800 border-red-200",
+  gray: "bg-gray-100 text-gray-800 border-gray-200",
+  purple: "bg-purple-100 text-purple-800 border-purple-200",
+};
+
 export default function Kanban() {
-  const [columns, setColumns] = useState<Column[]>(initialColumns);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [columns, setColumns] = useState<KanbanColumn[]>(initialColumns);
+  const [isStarred, setIsStarred] = useState(false);
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "urgent":
-        return "bg-red-100 text-red-700 border-red-200";
-      case "high":
-        return "bg-falcon-orange bg-opacity-10 text-falcon-orange border-falcon-orange border-opacity-20";
-      case "medium":
-        return "bg-falcon-blue bg-opacity-10 text-falcon-blue border-falcon-blue border-opacity-20";
-      case "low":
-        return "bg-gray-100 text-gray-600 border-gray-200";
-      default:
-        return "bg-gray-100 text-gray-600 border-gray-200";
-    }
-  };
-
-  const getPriorityIcon = (priority: string) => {
-    switch (priority) {
-      case "urgent":
-        return <AlertCircle className="h-3 w-3" />;
-      case "high":
-        return <Flag className="h-3 w-3" />;
-      case "medium":
-        return <Clock className="h-3 w-3" />;
-      case "low":
-        return <CheckCircle className="h-3 w-3" />;
-      default:
-        return <Clock className="h-3 w-3" />;
-    }
-  };
-
-  const isOverdue = (dueDate: string) => {
-    return new Date(dueDate) < new Date();
-  };
-
-  const handleDragStart = (e: React.DragEvent, task: Task) => {
-    e.dataTransfer.setData("text/plain", JSON.stringify(task));
+  const handleDragStart = (
+    e: React.DragEvent,
+    card: TaskCard,
+    sourceColumnId: string,
+  ) => {
+    e.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ card, sourceColumnId }),
+    );
   };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
 
-  const handleDrop = (e: React.DragEvent, columnId: string) => {
+  const handleDrop = (e: React.DragEvent, targetColumnId: string) => {
     e.preventDefault();
-    const taskData = e.dataTransfer.getData("text/plain");
-    const task = JSON.parse(taskData) as Task;
+    const data = e.dataTransfer.getData("text/plain");
+    const { card, sourceColumnId } = JSON.parse(data);
 
-    // Update task status and move between columns
-    const updatedTask = { ...task, status: columnId as Task["status"] };
+    if (sourceColumnId === targetColumnId) return;
 
-    setColumns((prevColumns) =>
-      prevColumns.map((column) => ({
-        ...column,
-        tasks:
-          column.id === columnId
-            ? [...column.tasks.filter((t) => t.id !== task.id), updatedTask]
-            : column.tasks.filter((t) => t.id !== task.id),
-      })),
+    setColumns((prev) =>
+      prev.map((column) => {
+        if (column.id === sourceColumnId) {
+          return {
+            ...column,
+            cards: column.cards.filter((c) => c.id !== card.id),
+          };
+        }
+        if (column.id === targetColumnId) {
+          return {
+            ...column,
+            cards: [...column.cards, card],
+          };
+        }
+        return column;
+      }),
     );
   };
 
   return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-falcon-text-primary font-poppins flex items-center gap-2">
-            <Trello className="h-6 w-6 text-falcon-blue" />
-            Kanban Board
-          </h1>
-          <p className="text-falcon-text-secondary font-poppins">
-            Manage your projects with visual task boards
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" className="font-poppins">
-            <Filter className="h-4 w-4 mr-2" />
-            Filter
-          </Button>
-          <Button variant="outline" className="font-poppins">
-            <Search className="h-4 w-4 mr-2" />
-            Search
-          </Button>
-          <Button className="bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90 font-poppins">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Task
-          </Button>
-        </div>
-      </div>
-
-      {/* Kanban Board Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {columns.map((column) => (
-          <Card key={column.id} className="bg-white border-falcon-border-light">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-falcon-text-secondary font-poppins">
-                    {column.title}
-                  </p>
-                  <p className="text-2xl font-bold text-falcon-text-primary font-poppins">
-                    {column.tasks.length}
-                  </p>
-                  {column.limit && (
-                    <p className="text-xs text-falcon-text-muted font-poppins">
-                      Limit: {column.limit}
-                    </p>
-                  )}
-                </div>
-                <div className={cn("w-3 h-12 rounded-full", column.color)} />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Kanban Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {columns.map((column) => (
-          <div key={column.id} className="space-y-4">
-            {/* Column Header */}
-            <Card className="bg-white border-falcon-border-light">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className={cn("w-3 h-3 rounded-full", column.color)} />
-                    <CardTitle className="font-poppins text-falcon-text-primary text-sm">
-                      {column.title}
-                    </CardTitle>
-                    <Badge variant="secondary" className="text-xs">
-                      {column.tasks.length}
-                    </Badge>
-                  </div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
-                        <Plus className="h-4 w-4 mr-2" />
-                        Add Task
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Edit className="h-4 w-4 mr-2" />
-                        Edit Column
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Archive className="h-4 w-4 mr-2" />
-                        Archive
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                {column.limit && (
-                  <Progress
-                    value={(column.tasks.length / column.limit) * 100}
-                    className="h-1 mt-2"
-                  />
-                )}
-              </CardHeader>
-            </Card>
-
-            {/* Tasks */}
-            <div
-              className="space-y-3 min-h-96"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, column.id)}
-            >
-              {column.tasks.map((task) => (
-                <Card
-                  key={task.id}
-                  className="bg-white border-falcon-border-light hover:shadow-md transition-shadow cursor-grab active:cursor-grabbing"
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, task)}
-                  onClick={() => setSelectedTask(task)}
-                >
-                  <CardContent className="p-4">
-                    <div className="space-y-3">
-                      {/* Task Header */}
-                      <div className="flex items-start justify-between">
-                        <h4 className="font-medium text-falcon-text-primary font-poppins text-sm leading-tight">
-                          {task.title}
-                        </h4>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-6 w-6 p-0"
-                            >
-                              <MoreHorizontal className="h-3 w-3" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              <Edit className="h-4 w-4 mr-2" />
-                              Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Star className="h-4 w-4 mr-2" />
-                              Star
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-red-600">
-                              <Trash2 className="h-4 w-4 mr-2" />
-                              Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-
-                      {/* Task Description */}
-                      <p className="text-xs text-falcon-text-secondary font-poppins line-clamp-2">
-                        {task.description}
-                      </p>
-
-                      {/* Priority Badge */}
-                      <div className="flex items-center gap-2">
-                        <Badge
-                          className={cn(
-                            "text-xs border",
-                            getPriorityColor(task.priority),
-                          )}
-                        >
-                          {getPriorityIcon(task.priority)}
-                          <span className="ml-1 capitalize">
-                            {task.priority}
-                          </span>
-                        </Badge>
-                        {isOverdue(task.dueDate) && (
-                          <Badge variant="destructive" className="text-xs">
-                            Overdue
-                          </Badge>
-                        )}
-                      </div>
-
-                      {/* Tags */}
-                      {task.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {task.tags.map((tag, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-xs px-1.5 py-0.5"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Progress Bar */}
-                      {task.progress > 0 && (
-                        <div className="space-y-1">
-                          <div className="flex justify-between items-center">
-                            <span className="text-xs text-falcon-text-muted font-poppins">
-                              Progress
-                            </span>
-                            <span className="text-xs text-falcon-text-muted font-poppins">
-                              {task.progress}%
-                            </span>
-                          </div>
-                          <Progress value={task.progress} className="h-1" />
-                        </div>
-                      )}
-
-                      {/* Task Meta */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3 text-xs text-falcon-text-muted">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span className="font-poppins">{task.dueDate}</span>
-                          </div>
-                          {task.attachments > 0 && (
-                            <div className="flex items-center gap-1">
-                              <Paperclip className="h-3 w-3" />
-                              <span className="font-poppins">
-                                {task.attachments}
-                              </span>
-                            </div>
-                          )}
-                          {task.comments > 0 && (
-                            <div className="flex items-center gap-1">
-                              <MessageSquare className="h-3 w-3" />
-                              <span className="font-poppins">
-                                {task.comments}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Assignees */}
-                        <div className="flex -space-x-1">
-                          {task.assignees.slice(0, 3).map((assignee) => (
-                            <Avatar
-                              key={assignee.id}
-                              className="w-6 h-6 border-2 border-white"
-                            >
-                              <AvatarImage
-                                src={assignee.avatar}
-                                alt={assignee.name}
-                              />
-                              <AvatarFallback className="text-xs">
-                                {assignee.name
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")}
-                              </AvatarFallback>
-                            </Avatar>
-                          ))}
-                          {task.assignees.length > 3 && (
-                            <div className="w-6 h-6 bg-falcon-bg-light border-2 border-white rounded-full flex items-center justify-center">
-                              <span className="text-xs text-falcon-text-muted font-poppins">
-                                +{task.assignees.length - 3}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-
-              {/* Add Task Button */}
+    <div className="h-full bg-falcon-bg-light">
+      {/* Project Header */}
+      <div className="bg-white border-b border-falcon-border-light p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
+              <h1 className="text-2xl font-bold text-falcon-text-dark font-poppins">
+                Falcon
+              </h1>
               <Button
                 variant="ghost"
-                className="w-full h-12 border-2 border-dashed border-falcon-border-light hover:border-falcon-blue hover:bg-falcon-blue hover:bg-opacity-5 font-poppins"
+                size="sm"
+                onClick={() => setIsStarred(!isStarred)}
+                className={cn(
+                  "h-8 w-8 p-0",
+                  isStarred
+                    ? "text-yellow-500"
+                    : "text-falcon-text-light hover:text-yellow-500",
+                )}
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Add Task
+                <Star className={cn("h-5 w-5", isStarred && "fill-current")} />
+              </Button>
+            </div>
+
+            {/* Team Members */}
+            <div className="flex items-center space-x-2">
+              <div className="flex -space-x-2">
+                {mockTeamMembers.slice(0, 4).map((member) => (
+                  <Avatar
+                    key={member.id}
+                    className="w-8 h-8 border-2 border-white"
+                  >
+                    <AvatarImage src={member.avatar} alt={member.name} />
+                    <AvatarFallback className="text-xs">
+                      {member.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                ))}
+                <div className="w-8 h-8 bg-falcon-bg-light border-2 border-white rounded-full flex items-center justify-center">
+                  <span className="text-xs text-falcon-text-light font-poppins">
+                    +1
+                  </span>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-falcon-text-light hover:text-falcon-blue"
+              >
+                <Users className="h-4 w-4 mr-1" />
+                <span className="text-sm font-poppins">Add members</span>
               </Button>
             </div>
           </div>
-        ))}
+
+          <div className="flex items-center space-x-2">
+            <Button variant="outline" size="sm" className="font-poppins">
+              <Filter className="h-4 w-4 mr-2" />
+              Filter
+            </Button>
+            <Button variant="outline" size="sm" className="font-poppins">
+              <Calendar className="h-4 w-4 mr-2" />
+              Calendar
+            </Button>
+            <Button variant="outline" size="sm" className="font-poppins">
+              <Share className="h-4 w-4 mr-2" />
+              Share
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <Settings className="h-4 w-4 mr-2" />
+                  Board settings
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Bell className="h-4 w-4 mr-2" />
+                  Watch
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Archive className="h-4 w-4 mr-2" />
+                  Archive
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+      </div>
+
+      {/* Kanban Board */}
+      <div className="p-6 overflow-x-auto">
+        <div className="flex space-x-4 min-w-max">
+          {columns.map((column) => (
+            <div key={column.id} className="w-80 flex-shrink-0">
+              {/* Column Header */}
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-falcon-text-dark font-poppins text-sm">
+                  {column.title}
+                </h3>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add a card
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>Copy list</DropdownMenuItem>
+                    <DropdownMenuItem>Move list</DropdownMenuItem>
+                    <DropdownMenuItem>Archive this list</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+              {/* Cards Container */}
+              <div
+                className="space-y-3 min-h-96"
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleDrop(e, column.id)}
+              >
+                {column.cards.map((card) => (
+                  <Card
+                    key={card.id}
+                    className="bg-white border-falcon-border-light hover:shadow-md transition-all cursor-pointer group"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, card, column.id)}
+                  >
+                    <CardContent className="p-0">
+                      {/* Cover Image */}
+                      {card.coverImage && (
+                        <div className="w-full h-24 bg-gray-100 rounded-t-lg overflow-hidden">
+                          <img
+                            src={card.coverImage}
+                            alt="Card cover"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+
+                      <div className="p-3">
+                        {/* Badges */}
+                        {card.badges.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            {card.badges.map((badge, index) => (
+                              <Badge
+                                key={index}
+                                className={cn(
+                                  "text-xs px-2 py-0.5 border font-medium",
+                                  badgeColors[badge.color],
+                                )}
+                              >
+                                {badge.text}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Card Title */}
+                        <h4 className="text-sm font-medium text-falcon-text-dark font-poppins leading-relaxed mb-3">
+                          {card.title}
+                        </h4>
+
+                        {/* Card Meta */}
+                        {(card.checklist ||
+                          card.attachments ||
+                          card.comments ||
+                          card.assignees.length > 0) && (
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              {/* Checklist */}
+                              {card.checklist && (
+                                <div className="flex items-center space-x-1 text-falcon-text-light">
+                                  <CheckSquare className="h-3 w-3" />
+                                  <span className="text-xs font-poppins">
+                                    {card.checklist.completed}/
+                                    {card.checklist.total}
+                                  </span>
+                                </div>
+                              )}
+
+                              {/* Attachments */}
+                              {card.attachments && (
+                                <div className="flex items-center space-x-1 text-falcon-text-light">
+                                  <Paperclip className="h-3 w-3" />
+                                  <span className="text-xs font-poppins">
+                                    {card.attachments}
+                                  </span>
+                                </div>
+                              )}
+
+                              {/* Comments */}
+                              {card.comments && (
+                                <div className="flex items-center space-x-1 text-falcon-text-light">
+                                  <MessageSquare className="h-3 w-3" />
+                                  <span className="text-xs font-poppins">
+                                    {card.comments}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Assignees */}
+                            {card.assignees.length > 0 && (
+                              <div className="flex -space-x-1">
+                                {card.assignees.slice(0, 3).map((assignee) => (
+                                  <Avatar
+                                    key={assignee.id}
+                                    className="w-6 h-6 border-2 border-white"
+                                  >
+                                    <AvatarImage
+                                      src={assignee.avatar}
+                                      alt={assignee.name}
+                                    />
+                                    <AvatarFallback className="text-xs">
+                                      {assignee.name
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                ))}
+                                {card.assignees.length > 3 && (
+                                  <div className="w-6 h-6 bg-falcon-bg-light border-2 border-white rounded-full flex items-center justify-center">
+                                    <span className="text-xs text-falcon-text-light font-poppins">
+                                      +{card.assignees.length - 3}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Edit button (visible on hover) */}
+                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 w-6 p-0 bg-white shadow-sm"
+                        >
+                          <MoreHorizontal className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+
+                {/* Add Card Button */}
+                <Button
+                  variant="ghost"
+                  className="w-full h-10 border-2 border-dashed border-falcon-border-light hover:border-falcon-blue hover:bg-falcon-blue hover:bg-opacity-5 text-falcon-text-light hover:text-falcon-blue font-poppins justify-start"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add a card
+                </Button>
+              </div>
+            </div>
+          ))}
+
+          {/* Add Column Button */}
+          <div className="w-80 flex-shrink-0">
+            <Button
+              variant="ghost"
+              className="w-full h-12 border-2 border-dashed border-falcon-border-light hover:border-falcon-blue hover:bg-falcon-blue hover:bg-opacity-5 text-falcon-text-light hover:text-falcon-blue font-poppins"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Add another list
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
