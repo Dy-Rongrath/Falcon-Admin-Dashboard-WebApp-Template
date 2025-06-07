@@ -2,82 +2,94 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { Routes, Route, HashRouter } from "react-router-dom";
+import { useState, lazy, Suspense } from "react";
 import SideNavigation from "@/components/SideNavigation";
 import TopNavigationBar from "@/components/TopNavigationBar";
 import CustomizeButton from "@/components/CustomizeButton";
 import Footer from "@/components/Footer";
 
-// Pages
+// Loading component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-[400px]">
+    <div className="flex flex-col items-center space-y-4">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-falcon-primary"></div>
+      <p className="text-falcon-text-secondary text-sm">Loading...</p>
+    </div>
+  </div>
+);
+
+// Import essential components that load immediately
 import Index from "./pages/Index";
-import Products from "./pages/ecommerce/Products";
-import ProductGrid from "./pages/ecommerce/ProductGrid";
-import ProductDetails from "./pages/ecommerce/ProductDetails";
-import AddProduct from "./pages/ecommerce/AddProduct";
-import Orders from "./pages/ecommerce/Orders";
-import OrderList from "./pages/ecommerce/OrderList";
-import OrderDetails from "./pages/ecommerce/OrderDetails";
-import Customers from "./pages/ecommerce/Customers";
-import CustomerDetails from "./pages/ecommerce/CustomerDetails";
-import Checkout from "./pages/ecommerce/Checkout";
-import Billing from "./pages/ecommerce/Billing";
-import Invoice from "./pages/ecommerce/Invoice";
-import UserManagement from "./pages/UserManagement";
-import TeamManagement from "./pages/TeamManagement";
-import Analytics from "./pages/Analytics";
-import DashboardAnalytics from "./pages/dashboard/Analytics";
-import Management from "./pages/dashboard/Management";
-import SaaS from "./pages/dashboard/SaaS";
-import DashboardSupportDesk from "./pages/dashboard/SupportDesk";
-import CRM from "./pages/dashboard/CRM";
-import LMS from "./pages/dashboard/LMS";
-import BasicForms from "./pages/forms/Basic";
-import AdvancedForms from "./pages/forms/Advanced";
-import FloatingLabelsForms from "./pages/forms/FloatingLabels";
-import WizardForms from "./pages/forms/Wizard";
-import ValidationForms from "./pages/forms/Validation";
-import TablesModule from "./pages/modules/Tables";
-import ChartsModule from "./pages/modules/Charts";
-import IconsModule from "./pages/modules/Icons";
-import MapsModule from "./pages/modules/Maps";
-import Email from "./pages/Email";
-import Kanban from "./pages/Kanban";
-import Settings from "./pages/Settings";
-import StandaloneProducts from "./pages/Products";
-import Events from "./pages/Events";
-import SupportDesk from "./pages/support/SupportDesk";
-import SupportAgents from "./pages/support/Agents";
-import Authentication from "./pages/Authentication";
-import Utilities from "./pages/Utilities";
-import FileManager from "./pages/FileManager";
-import Chat from "./pages/Chat";
-import Invoices from "./pages/Invoices";
-import Profile from "./pages/Profile";
-import Components from "./pages/Components";
-import Notifications from "./pages/Notifications";
-import Calendar from "./pages/Calendar";
-import Reports from "./pages/Reports";
-import Cart from "./pages/Cart";
-import ELearning from "./pages/ELearning";
-import Social from "./pages/Social";
-import Charts from "./pages/Charts";
-import Icons from "./pages/Icons";
-import Maps from "./pages/Maps";
-import Widgets from "./pages/Widgets";
-import Starter from "./pages/Starter";
 import NotFound from "./pages/NotFound";
 import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
-import FAQ from "./pages/FAQ";
-import Pricing from "./pages/Pricing";
-import Landing from "./pages/Landing";
-import EmailDetail from "./pages/email/EmailDetail";
-import EmailCompose from "./pages/email/EmailCompose";
-import CourseList from "./pages/elearning/CourseList";
-import CourseGrid from "./pages/elearning/CourseGrid";
-import ActivityLog from "./pages/social/ActivityLog";
-import SupportCards from "./pages/support/SupportCards";
+
+// Lazy load all other pages
+const Products = lazy(() => import("./pages/ecommerce/Products"));
+const ProductGrid = lazy(() => import("./pages/ecommerce/ProductGrid"));
+const ProductDetails = lazy(() => import("./pages/ecommerce/ProductDetails"));
+const AddProduct = lazy(() => import("./pages/ecommerce/AddProduct"));
+const Orders = lazy(() => import("./pages/ecommerce/Orders"));
+const OrderList = lazy(() => import("./pages/ecommerce/OrderList"));
+const OrderDetails = lazy(() => import("./pages/ecommerce/OrderDetails"));
+const Customers = lazy(() => import("./pages/ecommerce/Customers"));
+const CustomerDetails = lazy(() => import("./pages/ecommerce/CustomerDetails"));
+const Checkout = lazy(() => import("./pages/ecommerce/Checkout"));
+const Billing = lazy(() => import("./pages/ecommerce/Billing"));
+const Invoice = lazy(() => import("./pages/ecommerce/Invoice"));
+const UserManagement = lazy(() => import("./pages/UserManagement"));
+const TeamManagement = lazy(() => import("./pages/TeamManagement"));
+const Analytics = lazy(() => import("./pages/Analytics"));
+const DashboardAnalytics = lazy(() => import("./pages/dashboard/Analytics"));
+const Management = lazy(() => import("./pages/dashboard/Management"));
+const SaaS = lazy(() => import("./pages/dashboard/SaaS"));
+const DashboardSupportDesk = lazy(() => import("./pages/dashboard/SupportDesk"));
+const CRM = lazy(() => import("./pages/dashboard/CRM"));
+const LMS = lazy(() => import("./pages/dashboard/LMS"));
+const BasicForms = lazy(() => import("./pages/forms/Basic"));
+const AdvancedForms = lazy(() => import("./pages/forms/Advanced"));
+const FloatingLabelsForms = lazy(() => import("./pages/forms/FloatingLabels"));
+const WizardForms = lazy(() => import("./pages/forms/Wizard"));
+const ValidationForms = lazy(() => import("./pages/forms/Validation"));
+const TablesModule = lazy(() => import("./pages/modules/Tables"));
+const ChartsModule = lazy(() => import("./pages/modules/Charts"));
+const IconsModule = lazy(() => import("./pages/modules/Icons"));
+const MapsModule = lazy(() => import("./pages/modules/Maps"));
+const Email = lazy(() => import("./pages/Email"));
+const Kanban = lazy(() => import("./pages/Kanban"));
+const Settings = lazy(() => import("./pages/Settings"));
+const StandaloneProducts = lazy(() => import("./pages/Products"));
+const Events = lazy(() => import("./pages/Events"));
+const SupportDesk = lazy(() => import("./pages/support/SupportDesk"));
+const SupportAgents = lazy(() => import("./pages/support/Agents"));
+const Authentication = lazy(() => import("./pages/Authentication"));
+const Utilities = lazy(() => import("./pages/Utilities"));
+const FileManager = lazy(() => import("./pages/FileManager"));
+const Chat = lazy(() => import("./pages/Chat"));
+const Invoices = lazy(() => import("./pages/Invoices"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Components = lazy(() => import("./pages/Components"));
+const Notifications = lazy(() => import("./pages/Notifications"));
+const Calendar = lazy(() => import("./pages/Calendar"));
+const Reports = lazy(() => import("./pages/Reports"));
+const Cart = lazy(() => import("./pages/Cart"));
+const ELearning = lazy(() => import("./pages/ELearning"));
+const Social = lazy(() => import("./pages/Social"));
+const Charts = lazy(() => import("./pages/Charts"));
+const Icons = lazy(() => import("./pages/Icons"));
+const Maps = lazy(() => import("./pages/Maps"));
+const Widgets = lazy(() => import("./pages/Widgets"));
+const Starter = lazy(() => import("./pages/Starter"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Landing = lazy(() => import("./pages/Landing"));
+const EmailDetail = lazy(() => import("./pages/email/EmailDetail"));
+const EmailCompose = lazy(() => import("./pages/email/EmailCompose"));
+const CourseList = lazy(() => import("./pages/elearning/CourseList"));
+const CourseGrid = lazy(() => import("./pages/elearning/CourseGrid"));
+const ActivityLog = lazy(() => import("./pages/social/ActivityLog"));
+const SupportCards = lazy(() => import("./pages/support/SupportCards"));
 
 const queryClient = new QueryClient();
 
@@ -95,7 +107,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <TopNavigationBar
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
         />
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-6">
+          <Suspense fallback={<LoadingSpinner />}>
+            {children}
+          </Suspense>
+        </main>
         <Footer />
       </div>
       <CustomizeButton />
@@ -116,7 +132,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             path="/"
@@ -723,9 +739,16 @@ const App = () => (
                 <Starter />
               </DashboardLayout>
             }
-          />
-          <Route path="/404" element={<Error404 />} />
-          <Route path="/500" element={<Error500 />} />
+          />          <Route path="/404" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <Error404 />
+            </Suspense>
+          } />
+          <Route path="/500" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <Error500 />
+            </Suspense>
+          } />
           <Route
             path="/faq"
             element={
@@ -757,11 +780,14 @@ const App = () => (
                 <Landing />
               </DashboardLayout>
             }
-          />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          />          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <NotFound />
+            </Suspense>
+          } />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
