@@ -13,6 +13,7 @@ import Products from "./pages/ecommerce/Products";
 import Orders from "./pages/ecommerce/Orders";
 import Customers from "./pages/ecommerce/Customers";
 import UserManagement from "./pages/UserManagement";
+import TeamManagement from "./pages/TeamManagement";
 import Analytics from "./pages/Analytics";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
@@ -53,7 +54,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route
+            path="/"
+            element={
+              <DashboardLayout>
+                <Index />
+              </DashboardLayout>
+            }
+          />
           <Route
             path="/ecommerce/products"
             element={
@@ -83,6 +91,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <UserManagement />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <DashboardLayout>
+                <TeamManagement />
               </DashboardLayout>
             }
           />
