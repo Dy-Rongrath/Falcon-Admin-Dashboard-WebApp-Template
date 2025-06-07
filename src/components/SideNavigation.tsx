@@ -190,7 +190,7 @@ const navigationItems: NavItem[] = [
       },
       { icon: BarChart3, label: "Tables", path: "/modules/tables" },
       { icon: BarChart3, label: "Charts", path: "/modules/charts" },
-      { icon: Palette, label: "Icons", path: "/icons" },
+      { icon: Palette, label: "Icons", path: "/modules/icons" },
       { icon: FileText, label: "Maps", path: "/maps" },
       { icon: Package, label: "Components", path: "/components" },
       { icon: Settings, label: "Utilities", path: "/utilities" },

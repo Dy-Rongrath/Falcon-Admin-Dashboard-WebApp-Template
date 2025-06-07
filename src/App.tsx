@@ -39,6 +39,7 @@ import WizardForms from "./pages/forms/Wizard";
 import ValidationForms from "./pages/forms/Validation";
 import TablesModule from "./pages/modules/Tables";
 import ChartsModule from "./pages/modules/Charts";
+import IconsModule from "./pages/modules/Icons";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
 import Settings from "./pages/Settings";
@@ -334,6 +335,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <ChartsModule />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/modules/icons"
+            element={
+              <DashboardLayout>
+                <IconsModule />
               </DashboardLayout>
             }
           />
