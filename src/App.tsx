@@ -72,6 +72,8 @@ import Error500 from "./pages/Error500";
 import FAQ from "./pages/FAQ";
 import Pricing from "./pages/Pricing";
 import Landing from "./pages/Landing";
+import EmailDetail from "./pages/email/EmailDetail";
+import EmailCompose from "./pages/email/EmailCompose";
 
 const queryClient = new QueryClient();
 
@@ -365,6 +367,22 @@ const App = () => (
             element={
               <DashboardLayout>
                 <Email />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/email/detail"
+            element={
+              <DashboardLayout>
+                <EmailDetail />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/email/compose"
+            element={
+              <DashboardLayout>
+                <EmailCompose />
               </DashboardLayout>
             }
           />
