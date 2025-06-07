@@ -127,13 +127,16 @@ export default function SideNavigation() {
             "w-full justify-start gap-3 h-10 px-3 text-sm font-medium transition-colors font-poppins",
             level > 0 && "ml-6 w-[calc(100%-24px)]",
             itemIsActive
-              ? "bg-blue-50 text-blue-600 hover:bg-blue-50 hover:text-blue-600"
-              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+              ? "bg-falcon-blue bg-opacity-10 text-falcon-blue hover:bg-falcon-blue hover:bg-opacity-10"
+              : "text-falcon-text-secondary hover:bg-gray-50 hover:text-falcon-text-primary",
           )}
           onClick={handleClick}
         >
           <item.icon
-            className={cn("h-4 w-4 shrink-0", itemIsActive && "text-blue-600")}
+            className={cn(
+              "h-4 w-4 shrink-0",
+              itemIsActive && "text-falcon-blue",
+            )}
           />
           <span className="flex-1 text-left">{item.label}</span>
           {item.badge && (
@@ -142,23 +145,26 @@ export default function SideNavigation() {
               className={cn(
                 "text-xs px-1.5 py-0.5",
                 item.badge === "New"
-                  ? "bg-green-100 text-green-700 hover:bg-green-100"
-                  : "bg-blue-100 text-blue-700 hover:bg-blue-100",
+                  ? "bg-falcon-green bg-opacity-10 text-falcon-green hover:bg-falcon-green hover:bg-opacity-10"
+                  : "bg-falcon-blue bg-opacity-10 text-falcon-blue hover:bg-falcon-blue hover:bg-opacity-10",
               )}
             >
               {item.badge}
             </Badge>
           )}
-          {hasChildren &&
-            (isExpanded ? (
-              <ChevronDown className="h-3 w-3 text-slate-400" />
-            ) : (
-              <ChevronRight className="h-3 w-3 text-slate-400" />
-            ))}
+          {hasChildren && (
+            <div className="ml-auto">
+              {isExpanded ? (
+                <ChevronDown className="h-4 w-4" />
+              ) : (
+                <ChevronRight className="h-4 w-4" />
+              )}
+            </div>
+          )}
         </Button>
         {hasChildren && isExpanded && (
           <div className="mt-1 space-y-1">
-            {item.children!.map((child) => renderNavItem(child, level + 1))}
+            {item.children?.map((child) => renderNavItem(child, level + 1))}
           </div>
         )}
       </div>
@@ -166,55 +172,35 @@ export default function SideNavigation() {
   };
 
   return (
-    <div className="fixed left-0 top-0 z-40 h-screen w-64 bg-white border-r border-gray-200">
+    <div className="fixed left-0 top-0 z-40 h-screen w-64 bg-white border-r border-falcon-border-light">
       <ScrollArea className="h-full">
         <div className="flex h-full max-h-screen flex-col gap-2">
           {/* Logo */}
-          <div className="flex h-16 items-center border-b border-gray-200 px-6">
-            <h1 className="text-xl font-bold text-blue-600 font-poppins">falcon</h1>
+          <div className="flex h-16 items-center border-b border-falcon-border-light px-6">
+            <h1 className="text-xl font-bold text-falcon-blue font-poppins">
+              falcon
+            </h1>
           </div>
 
           {/* Search */}
           <div className="px-3 py-2">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-falcon-text-muted" />
               <Input
                 placeholder="Search..."
-                className="pl-10 h-9 bg-gray-50 border-0 text-sm placeholder:text-gray-500 font-poppins"
+                className="pl-10 h-9 bg-falcon-bg-light border-0 text-sm placeholder:text-falcon-text-muted font-poppins"
               />
             </div>
           </div>
-            <h1 className="font-semibold text-slate-900">falcon</h1>
-            <p className="text-xs text-slate-500">v3.23.0</p>
-          </div>
-        </div>
-      </div>
 
-      {/* Search */}
-      <div className="p-4 border-b border-slate-200">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <Input
-            placeholder="Search..."
-            className="pl-10 h-9 bg-slate-50 border-0 text-sm placeholder:text-slate-500"
-          />
+          {/* Navigation Items */}
+          <nav className="flex-1 px-3 pb-6">
+            <div className="space-y-1">
+              {navigationItems.map((item) => renderNavItem(item))}
+            </div>
+          </nav>
         </div>
-      </div>
-
-      {/* Navigation */}
-      <ScrollArea className="flex-1 p-4">
-        <nav className="space-y-1">
-          {navigationItems.map((item) => renderNavItem(item))}
-        </nav>
       </ScrollArea>
-
-      {/* Footer */}
-      <div className="p-4 border-t border-slate-200">
-        <div className="text-center">
-          <p className="text-xs text-slate-500">Built with Falcon</p>
-          <p className="text-xs text-slate-400 mt-1">v3.23.0</p>
-        </div>
-      </div>
     </div>
   );
 }
