@@ -610,6 +610,17 @@ const App = () => (
             }
           />
           <Route
+            path="/social/followers"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Followers</h1>
+                  <p>Followers management page - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
             path="/charts"
             element={
               <DashboardLayout>
