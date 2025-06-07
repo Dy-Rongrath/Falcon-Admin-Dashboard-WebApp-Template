@@ -58,7 +58,7 @@ const notifications: Notification[] = [
     category: "orders",
     isRead: false,
     timestamp: "2024-01-28T10:30:00Z",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     sender: "E-commerce System",
     actionUrl: "/orders/12345",
   },
@@ -71,7 +71,7 @@ const notifications: Notification[] = [
     category: "mentions",
     isRead: false,
     timestamp: "2024-01-28T09:15:00Z",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     sender: "Sarah Wilson",
   },
   {
@@ -92,7 +92,7 @@ const notifications: Notification[] = [
     category: "comments",
     isRead: false,
     timestamp: "2024-01-27T14:20:00Z",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     sender: "Mike Johnson",
   },
   {
@@ -115,7 +115,7 @@ const notifications: Notification[] = [
     category: "likes",
     isRead: true,
     timestamp: "2024-01-26T18:10:00Z",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     sender: "Alex Brown",
   },
 ];

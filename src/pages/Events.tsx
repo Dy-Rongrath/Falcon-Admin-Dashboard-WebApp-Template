@@ -58,7 +58,7 @@ const events: Event[] = [
     status: "upcoming",
     organizer: {
       name: "John Doe",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
   },
   {
@@ -74,7 +74,7 @@ const events: Event[] = [
     status: "upcoming",
     organizer: {
       name: "Jane Smith",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
   },
   {
@@ -90,7 +90,7 @@ const events: Event[] = [
     status: "upcoming",
     organizer: {
       name: "Mike Johnson",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
   },
   {
@@ -106,7 +106,7 @@ const events: Event[] = [
     status: "upcoming",
     organizer: {
       name: "Sarah Wilson",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
   },
   {
@@ -122,7 +122,7 @@ const events: Event[] = [
     status: "completed",
     organizer: {
       name: "David Brown",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
   },
 ];

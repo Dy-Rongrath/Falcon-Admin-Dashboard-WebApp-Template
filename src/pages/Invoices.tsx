@@ -63,7 +63,7 @@ const invoices: Invoice[] = [
     client: {
       name: "Acme Corporation",
       email: "billing@acme.com",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
     amount: 5240.0,
     status: "paid",
@@ -78,7 +78,7 @@ const invoices: Invoice[] = [
     client: {
       name: "TechStart Inc",
       email: "finance@techstart.com",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
     amount: 3450.0,
     status: "sent",
@@ -93,7 +93,7 @@ const invoices: Invoice[] = [
     client: {
       name: "Global Solutions",
       email: "accounts@global.com",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
     amount: 7890.0,
     status: "overdue",
@@ -108,7 +108,7 @@ const invoices: Invoice[] = [
     client: {
       name: "StartupCo",
       email: "billing@startup.co",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
     amount: 2100.0,
     status: "draft",
@@ -123,7 +123,7 @@ const invoices: Invoice[] = [
     client: {
       name: "Enterprise Ltd",
       email: "payments@enterprise.com",
-      avatar: "/placeholder.svg",
+      avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
     },
     amount: 12500.0,
     status: "sent",

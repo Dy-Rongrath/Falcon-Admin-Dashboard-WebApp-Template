@@ -20,7 +20,7 @@ const files: SharedFile[] = [
     sharedBy: "John Doe",
     sharedAt: "2 hours ago",
     type: "pdf",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
   },
   {
     name: "Marketing Strategy.ppt",
@@ -28,7 +28,7 @@ const files: SharedFile[] = [
     sharedBy: "Jane Smith",
     sharedAt: "5 hours ago",
     type: "ppt",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
   },
   {
     name: "Financial Data.xls",
@@ -36,7 +36,7 @@ const files: SharedFile[] = [
     sharedBy: "Mike Johnson",
     sharedAt: "1 day ago",
     type: "xls",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
   },
   {
     name: "Project Proposal.doc",
@@ -44,7 +44,7 @@ const files: SharedFile[] = [
     sharedBy: "Sarah Wilson",
     sharedAt: "2 days ago",
     type: "doc",
-    avatar: "/placeholder.svg",
+    avatar: `${import.meta.env.BASE_URL}placeholder.svg`,
   },
 ];
 
