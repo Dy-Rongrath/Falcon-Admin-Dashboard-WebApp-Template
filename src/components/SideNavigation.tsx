@@ -70,11 +70,10 @@ const navigationItems: NavItem[] = [
         icon: ShoppingCart,
         label: "Orders",
         children: [
-          { icon: ShoppingCart, label: "Order list", path: "/ecommerce/order-list" },
-          { icon: ShoppingCart, label: "Order details", path: "/ecommerce/orders/1" },
-        ]
+          {
+            icon: ShoppingCart,
             label: "Order list",
-            path: "/ecommerce/orders",
+            path: "/ecommerce/order-list",
           },
           {
             icon: ShoppingCart,
