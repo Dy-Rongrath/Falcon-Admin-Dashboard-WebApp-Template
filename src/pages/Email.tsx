@@ -61,7 +61,7 @@ const mockEmails: Email[] = [
     from: {
       name: "Sarah Johnson",
       email: "sarah.johnson@company.com",
-      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}/placeholder/32/32",
     },
     to: ["me@company.com"],
     subject: "Q4 Sales Report - Action Required",
@@ -79,7 +79,7 @@ const mockEmails: Email[] = [
     from: {
       name: "Michael Chen",
       email: "michael.chen@techstart.com",
-      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}/placeholder/32/32",
     },
     to: ["me@company.com"],
     subject: "Meeting Follow-up: Project Alpha",
@@ -97,7 +97,7 @@ const mockEmails: Email[] = [
     from: {
       name: "LinkedIn",
       email: "notifications@linkedin.com",
-      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}/placeholder/32/32",
     },
     to: ["me@company.com"],
     subject: "Your weekly LinkedIn summary",
@@ -115,7 +115,7 @@ const mockEmails: Email[] = [
     from: {
       name: "Emily Rodriguez",
       email: "emily.r@design.com",
-      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}/placeholder/32/32",
     },
     to: ["me@company.com"],
     subject: "New Design System Components",
@@ -133,7 +133,7 @@ const mockEmails: Email[] = [
     from: {
       name: "Amazon",
       email: "shipment@amazon.com",
-      avatar: "${import.meta.env.BASE_URL}api/placeholder/32/32",
+      avatar: "${import.meta.env.BASE_URL}/placeholder/32/32",
     },
     to: ["me@company.com"],
     subject: "Your order has been shipped!",
