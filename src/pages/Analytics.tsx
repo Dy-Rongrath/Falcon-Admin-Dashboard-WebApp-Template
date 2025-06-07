@@ -825,11 +825,18 @@ export default function Analytics() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-falcon-bg-light flex items-center justify-center">
-                          {browser.name === "Chrome" && <Chrome className="h-5 w-5 text-falcon-blue" />}
-                          {browser.name === "Safari" && <Globe className="h-5 w-5 text-falcon-green" />}
-                          {browser.name === "Firefox" && <Firefox className="h-5 w-5 text-falcon-orange" />}
-                          {browser.name === "Edge" && <Globe className="h-5 w-5 text-gray-600" />}
-                        </div>
+                          {browser.name === "Chrome" && (
+                            <Chrome className="h-5 w-5 text-falcon-blue" />
+                          )}
+                          {browser.name === "Safari" && (
+                            <Globe className="h-5 w-5 text-falcon-green" />
+                          )}
+                          {browser.name === "Firefox" && (
+                            <Firefox className="h-5 w-5 text-falcon-orange" />
+                          )}
+                          {browser.name === "Edge" && (
+                            <Globe className="h-5 w-5 text-gray-600" />
+                          )}
                         </div>
                         <div>
                           <div className="font-medium text-falcon-text-primary font-poppins">
