@@ -23,17 +23,17 @@ export default function SalesChart() {
   return (
     <Card className="border-0 shadow-sm">
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-semibold text-slate-900">
+        <CardTitle className="text-lg font-semibold text-gray-900 font-poppins">
           Total Sales
         </CardTitle>
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-            <span className="text-slate-600">Sales</span>
+            <span className="text-gray-600 font-poppins">Sales</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-            <span className="text-slate-600">Target</span>
+            <span className="text-gray-600 font-poppins">Target</span>
           </div>
         </div>
       </CardHeader>
