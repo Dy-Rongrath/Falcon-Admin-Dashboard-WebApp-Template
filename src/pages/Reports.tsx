@@ -266,11 +266,34 @@ export default function Reports() {
                         axisLine={false}
                         tickLine={false}
                         tick={{ fontSize: 12, fill: "#64748b" }}
+                        type="category"
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
+                        scale="auto"
+                        tickCount={undefined}
+                        minTickGap={5}
+                        mirror={false}
+                        reversed={false}
+                        hide={false}
+                        interval="preserveStartEnd"
                       />
                       <YAxis
                         axisLine={false}
                         tickLine={false}
                         tick={{ fontSize: 12, fill: "#64748b" }}
+                        type="number"
+                        domain={["dataMin", "dataMax"]}
+                        allowDataOverflow={false}
+                        allowDecimals={true}
+                        allowDuplicatedCategory={true}
+                        scale="auto"
+                        tickCount={undefined}
+                        minTickGap={5}
+                        mirror={false}
+                        reversed={false}
+                        hide={false}
+                        orientation="left"
                       />
                       <Tooltip />
                       <Line
