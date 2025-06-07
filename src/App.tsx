@@ -439,6 +439,61 @@ const App = () => (
             }
           />
           <Route
+            path="/support/contacts"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Contacts</h1>
+                  <p>Customer contacts management - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/contacts/:id"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Contact Details</h1>
+                  <p>Individual contact details - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/preview"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Tickets Preview</h1>
+                  <p>Ticket preview dashboard - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/links"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Quick Links</h1>
+                  <p>Support quick links - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/support/reports"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Support Reports</h1>
+                  <p>Support analytics and reports - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
             path="/support/agents"
             element={
               <DashboardLayout>
