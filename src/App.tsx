@@ -40,6 +40,7 @@ import ValidationForms from "./pages/forms/Validation";
 import TablesModule from "./pages/modules/Tables";
 import ChartsModule from "./pages/modules/Charts";
 import IconsModule from "./pages/modules/Icons";
+import MapsModule from "./pages/modules/Maps";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
 import Settings from "./pages/Settings";
@@ -343,6 +344,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <IconsModule />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/modules/maps"
+            element={
+              <DashboardLayout>
+                <MapsModule />
               </DashboardLayout>
             }
           />
