@@ -38,6 +38,7 @@ import FloatingLabelsForms from "./pages/forms/FloatingLabels";
 import WizardForms from "./pages/forms/Wizard";
 import ValidationForms from "./pages/forms/Validation";
 import TablesModule from "./pages/modules/Tables";
+import ChartsModule from "./pages/modules/Charts";
 import Email from "./pages/Email";
 import Kanban from "./pages/Kanban";
 import Settings from "./pages/Settings";
@@ -325,6 +326,14 @@ const App = () => (
             element={
               <DashboardLayout>
                 <TablesModule />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/modules/charts"
+            element={
+              <DashboardLayout>
+                <ChartsModule />
               </DashboardLayout>
             }
           />
