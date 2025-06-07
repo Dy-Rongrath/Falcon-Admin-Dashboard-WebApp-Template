@@ -48,7 +48,11 @@ const navigationItems: NavItem[] = [
         icon: Package,
         label: "Product",
         children: [
-          { icon: Package, label: "Product list", path: "/ecommerce/products" },
+          {
+            icon: Package,
+            label: "Product grid",
+            path: "/ecommerce/product-grid",
+          },
           {
             icon: Package,
             label: "Product grid",
