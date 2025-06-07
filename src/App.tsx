@@ -67,6 +67,8 @@ import Maps from "./pages/Maps";
 import Widgets from "./pages/Widgets";
 import Starter from "./pages/Starter";
 import NotFound from "./pages/NotFound";
+import Error404 from "./pages/Error404";
+import Error500 from "./pages/Error500";
 
 const queryClient = new QueryClient();
 
