@@ -228,7 +228,9 @@ export default function SideNavigation({
         </Button>
         {hasChildren && isExpanded && (
           <div className="mt-1 space-y-1">
-            {item.children?.map((child, index) => renderNavItem(child, level + 1, `${item.label}-${index}`))}
+            {item.children?.map((child, index) =>
+              renderNavItem(child, level + 1, `${item.label}-${index}`),
+            )}
           </div>
         )}
       </div>
@@ -264,8 +266,9 @@ export default function SideNavigation({
 
           {/* Navigation Items */}
           <nav className="flex-1 space-y-1 p-4">
-            {navigationItems.map((item, index) => renderNavItem(item, 0, `nav-${index}`))}
-          </nav>
+            {navigationItems.map((item, index) =>
+              renderNavItem(item, 0, `nav-${index}`),
+            )}
           </nav>
         </div>
       </ScrollArea>
