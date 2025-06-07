@@ -24,14 +24,16 @@ export default function MetricCard({
         return (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium text-slate-600">{title}</h3>
+              <h3 className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                {title}
+              </h3>
               {trend && (
                 <Badge
                   variant="secondary"
                   className={cn(
-                    "text-xs px-2 py-1",
+                    "text-xs px-2 py-1 font-poppins",
                     trend.startsWith("+")
-                      ? "bg-green-100 text-green-700"
+                      ? "bg-falcon-green bg-opacity-10 text-falcon-green"
                       : "bg-red-100 text-red-700",
                   )}
                 >
@@ -40,17 +42,25 @@ export default function MetricCard({
                 </Badge>
               )}
             </div>
-            <div className="text-2xl font-semibold text-slate-900">{value}</div>
-            <div className="text-xs text-slate-500">Compared to last week</div>
+            <div className="text-2xl font-semibold text-falcon-text-primary font-poppins">
+              {value}
+            </div>
+            <div className="text-xs text-falcon-text-muted font-poppins">
+              Compared to last week
+            </div>
           </div>
         );
 
       case "orders":
         return (
           <div className="space-y-3">
-            <h3 className="text-sm font-medium text-slate-600">{title}</h3>
-            <div className="text-2xl font-semibold text-slate-900">{value}</div>
-            <div className="flex items-center text-xs text-green-600">
+            <h3 className="text-sm font-medium text-falcon-text-secondary font-poppins">
+              {title}
+            </h3>
+            <div className="text-2xl font-semibold text-falcon-text-primary font-poppins">
+              {value}
+            </div>
+            <div className="flex items-center text-xs text-falcon-green font-poppins">
               <TrendingUp className="h-3 w-3 mr-1" />
               +1.5% than yesterday
             </div>
@@ -60,11 +70,15 @@ export default function MetricCard({
       case "market":
         return (
           <div className="space-y-3">
-            <h3 className="text-sm font-medium text-slate-600">{title}</h3>
-            <div className="text-2xl font-semibold text-slate-900">{value}</div>
-            <div className="h-16 bg-slate-50 rounded-lg flex items-center justify-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-blue-600 rounded-full"></div>
+            <h3 className="text-sm font-medium text-falcon-text-secondary font-poppins">
+              {title}
+            </h3>
+            <div className="text-2xl font-semibold text-falcon-text-primary font-poppins">
+              {value}
+            </div>
+            <div className="h-16 bg-falcon-bg-light rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-falcon-blue bg-opacity-10 rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 bg-falcon-blue rounded-full"></div>
               </div>
             </div>
           </div>
@@ -73,15 +87,23 @@ export default function MetricCard({
       case "weather":
         return (
           <div className="space-y-3">
-            <h3 className="text-sm font-medium text-slate-600">{title}</h3>
-            <div className="text-2xl font-semibold text-slate-900">{value}</div>
-            <div className="flex items-center gap-2">
-              <Cloud className="h-4 w-4 text-slate-400" />
-              <span className="text-xs text-slate-500">New York City</span>
+            <h3 className="text-sm font-medium text-falcon-text-secondary font-poppins">
+              {title}
+            </h3>
+            <div className="text-2xl font-semibold text-falcon-text-primary font-poppins">
+              {value}
             </div>
             <div className="flex items-center gap-2">
-              <Thermometer className="h-4 w-4 text-orange-500" />
-              <span className="text-sm text-slate-700">31°C</span>
+              <Cloud className="h-4 w-4 text-falcon-text-muted" />
+              <span className="text-xs text-falcon-text-muted font-poppins">
+                New York City
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Thermometer className="h-4 w-4 text-falcon-orange" />
+              <span className="text-sm text-falcon-text-primary font-poppins">
+                31°C
+              </span>
             </div>
           </div>
         );
@@ -92,7 +114,7 @@ export default function MetricCard({
   };
 
   return (
-    <Card className={cn("p-0 border-0 shadow-sm", className)}>
+    <Card className={cn("p-0 border-0 shadow-sm bg-white", className)}>
       <CardContent className="p-6">{renderContent()}</CardContent>
     </Card>
   );
