@@ -823,13 +823,7 @@ export default function Analytics() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-falcon-bg-light flex items-center justify-center">
-                          <Globe className={`h-5 w-5 ${
-                            browser.name === "Chrome" ? "text-falcon-blue" :
-                            browser.name === "Safari" ? "text-falcon-green" :
-                            browser.name === "Firefox" ? "text-falcon-orange" :
-                            "text-gray-600"
-                          }`} />
-                        </div>
+                          <Globe className="h-5 w-5 text-falcon-blue" />
                         </div>
                         <div>
                           <div className="font-medium text-falcon-text-primary font-poppins">
