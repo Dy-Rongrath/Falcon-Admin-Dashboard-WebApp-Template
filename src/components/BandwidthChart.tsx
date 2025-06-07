@@ -65,35 +65,12 @@ export default function BandwidthChart() {
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 12, fill: "#64748b" }}
-                type="category"
-                interval="preserveStartEnd"
-                allowDataOverflow={false}
-                allowDecimals={true}
-                allowDuplicatedCategory={true}
-                scale="auto"
-                tickCount={undefined}
-                minTickGap={5}
-                mirror={false}
-                reversed={false}
-                hide={false}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 12, fill: "#64748b" }}
                 label={{ value: "Mbps", angle: -90, position: "insideLeft" }}
-                type="number"
-                domain={["dataMin", "dataMax"]}
-                allowDataOverflow={false}
-                allowDecimals={true}
-                allowDuplicatedCategory={true}
-                scale="auto"
-                tickCount={undefined}
-                minTickGap={5}
-                mirror={false}
-                reversed={false}
-                hide={false}
-                orientation="left"
               />
               <Tooltip
                 contentStyle={{
