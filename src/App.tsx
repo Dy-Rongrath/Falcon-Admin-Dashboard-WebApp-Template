@@ -549,6 +549,50 @@ const App = () => (
             }
           />
           <Route
+            path="/elearning/courses/:id"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Course Details</h1>
+                  <p>Course details page - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/elearning/create-course"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Create Course</h1>
+                  <p>Course creation page - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/elearning/students"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Student Overview</h1>
+                  <p>Student management page - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/elearning/trainer"
+            element={
+              <DashboardLayout>
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Trainer Profile</h1>
+                  <p>Trainer profile page - Coming Soon</p>
+                </div>
+              </DashboardLayout>
+            }
+          />
+          <Route
             path="/social"
             element={
               <DashboardLayout>
