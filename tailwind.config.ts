@@ -19,6 +19,7 @@ export default {
     },
     extend: {
       colors: {
+        // Core Tailwind variables
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -62,6 +63,30 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Falcon-specific colors for direct use
+        falcon: {
+          blue: "#2C7BE5", // Primary Blue
+          "light-blue": "#27BCFD", // Light Blue
+          green: "#00D27A", // Success Green
+          orange: "#F5803E", // Warning Orange
+          "bg-light": "#EDF2F9", // Background Light
+          "text-primary": "#344050", // Text Primary
+          "text-secondary": "#4D5969", // Text Secondary
+          "text-muted": "#9DA9BB", // Text Muted
+          "border-light": "#D8E2EF", // Border Light
+        },
+      },
+      fontFamily: {
+        poppins: [
+          "Poppins",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
       },
       borderRadius: {
         lg: "var(--radius)",
