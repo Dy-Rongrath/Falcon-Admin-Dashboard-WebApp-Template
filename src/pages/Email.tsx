@@ -6,21 +6,33 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Mail,
-  Search,
-  Plus,
+  Inbox,
+  Send,
+  Edit,
   Star,
   Archive,
   Trash2,
+  Search,
+  Paperclip,
   Reply,
   Forward,
-  Paperclip,
-  Send,
-  Inbox,
-  Send as SendIcon,
-  File,
-  AlertCircle,
+  MoreHorizontal,
+  Plus,
+  Calendar,
+  Clock,
+  Flag,
+  Download,
+  Print,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -31,94 +43,161 @@ interface Email {
     email: string;
     avatar: string;
   };
+  to: string[];
   subject: string;
-  preview: string;
   body: string;
   timestamp: string;
   isRead: boolean;
   isStarred: boolean;
-  hasAttachment: boolean;
-  category: "inbox" | "sent" | "drafts" | "spam";
+  isFlagged: boolean;
+  hasAttachments: boolean;
+  category: "primary" | "social" | "promotions" | "updates";
+  isImportant: boolean;
 }
 
-const emails: Email[] = [
+const mockEmails: Email[] = [
   {
     id: "1",
     from: {
-      name: "John Doe",
-      email: "john@company.com",
-      avatar: "/placeholder.svg",
+      name: "Sarah Johnson",
+      email: "sarah.johnson@company.com",
+      avatar: "/api/placeholder/32/32",
     },
-    subject: "Project Update - Q4 Review",
-    preview:
-      "Hi team, I wanted to share the latest updates on our Q4 project milestones...",
-    body: "Hi team,\n\nI wanted to share the latest updates on our Q4 project milestones. We've made significant progress across all departments and I'm pleased to report that we're on track to meet our objectives.\n\nKey achievements:\n- Completed Phase 1 development\n- Conducted user testing sessions\n- Finalized design specifications\n\nNext steps:\n- Begin Phase 2 implementation\n- Schedule stakeholder presentations\n- Prepare deployment plan\n\nPlease let me know if you have any questions.\n\nBest regards,\nJohn",
-    timestamp: "2024-01-28T10:30:00Z",
+    to: ["me@company.com"],
+    subject: "Q4 Sales Report - Action Required",
+    body: "Hi team,\n\nI hope this email finds you well. I wanted to share the Q4 sales report with you and discuss some important updates regarding our performance this quarter...",
+    timestamp: "2024-02-15 09:30",
     isRead: false,
     isStarred: true,
-    hasAttachment: true,
-    category: "inbox",
+    isFlagged: true,
+    hasAttachments: true,
+    category: "primary",
+    isImportant: true,
   },
   {
     id: "2",
     from: {
-      name: "Jane Smith",
-      email: "jane@example.com",
-      avatar: "/placeholder.svg",
+      name: "Michael Chen",
+      email: "michael.chen@techstart.com",
+      avatar: "/api/placeholder/32/32",
     },
-    subject: "Meeting Reminder - Tomorrow 2PM",
-    preview:
-      "Just a quick reminder about our scheduled meeting tomorrow at 2PM...",
-    body: "Hi everyone,\n\nJust a quick reminder about our scheduled meeting tomorrow at 2PM in the main conference room.\n\nAgenda:\n- Review current project status\n- Discuss upcoming deadlines\n- Resource allocation\n\nPlease bring your latest reports.\n\nThanks,\nJane",
-    timestamp: "2024-01-27T14:20:00Z",
+    to: ["me@company.com"],
+    subject: "Meeting Follow-up: Project Alpha",
+    body: "Thank you for the productive meeting this morning. As discussed, I'm sending over the project timeline and next steps...",
+    timestamp: "2024-02-15 08:45",
     isRead: true,
     isStarred: false,
-    hasAttachment: false,
-    category: "inbox",
+    isFlagged: false,
+    hasAttachments: false,
+    category: "primary",
+    isImportant: false,
   },
   {
     id: "3",
     from: {
-      name: "Mike Johnson",
-      email: "mike@company.com",
-      avatar: "/placeholder.svg",
+      name: "LinkedIn",
+      email: "notifications@linkedin.com",
+      avatar: "/api/placeholder/32/32",
     },
-    subject: "Budget Approval Request",
-    preview:
-      "I'm writing to request approval for the additional budget allocation...",
-    body: "Dear Finance Team,\n\nI'm writing to request approval for the additional budget allocation for the upcoming marketing campaign.\n\nDetails:\n- Total amount: $15,000\n- Duration: 3 months\n- Expected ROI: 250%\n\nPlease find the detailed proposal attached.\n\nBest regards,\nMike",
-    timestamp: "2024-01-26T09:15:00Z",
+    to: ["me@company.com"],
+    subject: "Your weekly LinkedIn summary",
+    body: "Here's what you missed this week on LinkedIn...",
+    timestamp: "2024-02-14 18:00",
     isRead: true,
     isStarred: false,
-    hasAttachment: true,
-    category: "inbox",
+    isFlagged: false,
+    hasAttachments: false,
+    category: "social",
+    isImportant: false,
+  },
+  {
+    id: "4",
+    from: {
+      name: "Emily Rodriguez",
+      email: "emily.r@design.com",
+      avatar: "/api/placeholder/32/32",
+    },
+    to: ["me@company.com"],
+    subject: "New Design System Components",
+    body: "I've finished the new component library for our design system. Please review the attached files and let me know your thoughts...",
+    timestamp: "2024-02-14 16:20",
+    isRead: false,
+    isStarred: true,
+    isFlagged: false,
+    hasAttachments: true,
+    category: "primary",
+    isImportant: true,
+  },
+  {
+    id: "5",
+    from: {
+      name: "Amazon",
+      email: "shipment@amazon.com",
+      avatar: "/api/placeholder/32/32",
+    },
+    to: ["me@company.com"],
+    subject: "Your order has been shipped!",
+    body: "Good news! Your recent order has been shipped and is on its way...",
+    timestamp: "2024-02-14 14:15",
+    isRead: true,
+    isStarred: false,
+    isFlagged: false,
+    hasAttachments: false,
+    category: "promotions",
+    isImportant: false,
   },
 ];
 
+const emailCategories = [
+  { id: "inbox", label: "Inbox", icon: Inbox, count: 12 },
+  { id: "starred", label: "Starred", icon: Star, count: 3 },
+  { id: "sent", label: "Sent Mail", icon: Send, count: 0 },
+  { id: "drafts", label: "Drafts", icon: Edit, count: 2 },
+  { id: "archive", label: "Archive", icon: Archive, count: 45 },
+  { id: "trash", label: "Trash", icon: Trash2, count: 8 },
+];
+
 export default function Email() {
-  const [selectedCategory, setSelectedCategory] = useState<
-    "inbox" | "sent" | "drafts" | "spam"
-  >("inbox");
-  const [selectedEmail, setSelectedEmail] = useState<Email | null>(emails[0]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("inbox");
+  const [selectedEmail, setSelectedEmail] = useState<Email | null>(
+    mockEmails[0],
+  );
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isComposing, setIsComposing] = useState(false);
+  const [composeData, setComposeData] = useState({
+    to: "",
+    subject: "",
+    body: "",
+  });
 
-  const categories = [
-    { id: "inbox" as const, label: "Inbox", icon: Inbox, count: 6 },
-    { id: "sent" as const, label: "Sent", icon: SendIcon, count: 12 },
-    { id: "drafts" as const, label: "Drafts", icon: File, count: 3 },
-    { id: "spam" as const, label: "Spam", icon: AlertCircle, count: 2 },
-  ];
+  const filteredEmails = mockEmails.filter((email) => {
+    const matchesSearch =
+      email.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      email.from.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      email.body.toLowerCase().includes(searchTerm.toLowerCase());
 
-  const formatTimestamp = (timestamp: string) => {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    switch (selectedCategory) {
+      case "starred":
+        return matchesSearch && email.isStarred;
+      case "inbox":
+      default:
+        return matchesSearch;
+    }
+  });
 
-    if (diffDays === 1) return "Today";
-    if (diffDays === 2) return "Yesterday";
-    if (diffDays <= 7) return `${diffDays - 1} days ago`;
-    return date.toLocaleDateString();
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "primary":
+        return "bg-falcon-blue bg-opacity-10 text-falcon-blue";
+      case "social":
+        return "bg-falcon-green bg-opacity-10 text-falcon-green";
+      case "promotions":
+        return "bg-falcon-orange bg-opacity-10 text-falcon-orange";
+      case "updates":
+        return "bg-purple-100 text-purple-700";
+      default:
+        return "bg-gray-100 text-gray-700";
+    }
   };
 
   return (
@@ -126,85 +205,103 @@ export default function Email() {
       {/* Page Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Mail className="h-6 w-6" />
+          <h1 className="text-2xl font-bold text-falcon-text-primary font-poppins flex items-center gap-2">
+            <Mail className="h-6 w-6 text-falcon-blue" />
             Email
           </h1>
-          <p className="text-gray-600">Manage your email communications</p>
+          <p className="text-falcon-text-secondary font-poppins">
+            Manage your emails and communications
+          </p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button
+          onClick={() => setIsComposing(true)}
+          className="bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90 font-poppins"
+        >
           <Plus className="h-4 w-4 mr-2" />
           Compose
         </Button>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 h-[calc(100vh-200px)]">
+      {/* Email Interface */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-200px)]">
         {/* Sidebar */}
-        <div className="col-span-3">
-          <Card className="h-full">
-            <CardHeader className="pb-4">
+        <Card className="bg-white border-falcon-border-light lg:col-span-1">
+          <CardContent className="p-0">
+            <div className="p-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-falcon-text-muted" />
                 <Input
                   placeholder="Search emails..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-9 font-poppins"
                 />
               </div>
-            </CardHeader>
-            <CardContent className="p-0">
-              <div className="space-y-1">
-                {categories.map((category) => (
-                  <button
+            </div>
+            <Separator />
+            <ScrollArea className="h-96">
+              <div className="p-2">
+                {emailCategories.map((category) => (
+                  <Button
                     key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
+                    variant="ghost"
                     className={cn(
-                      "w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 transition-colors",
-                      selectedCategory === category.id &&
-                        "bg-blue-50 text-blue-600 border-r-2 border-blue-600",
+                      "w-full justify-start gap-3 h-10 px-3 text-sm font-medium transition-colors font-poppins mb-1",
+                      selectedCategory === category.id
+                        ? "bg-falcon-blue bg-opacity-10 text-falcon-blue"
+                        : "text-falcon-text-secondary hover:bg-falcon-bg-light",
                     )}
+                    onClick={() => setSelectedCategory(category.id)}
                   >
-                    <div className="flex items-center gap-3">
-                      <category.icon className="h-4 w-4" />
-                      <span className="font-medium">{category.label}</span>
-                    </div>
-                    <Badge variant="secondary" className="text-xs">
-                      {category.count}
-                    </Badge>
-                  </button>
+                    <category.icon className="h-4 w-4" />
+                    <span className="flex-1 text-left">{category.label}</span>
+                    {category.count > 0 && (
+                      <Badge
+                        variant="secondary"
+                        className="text-xs px-1.5 py-0.5 bg-falcon-text-muted bg-opacity-20"
+                      >
+                        {category.count}
+                      </Badge>
+                    )}
+                  </Button>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </ScrollArea>
+          </CardContent>
+        </Card>
 
         {/* Email List */}
-        <div className="col-span-4">
-          <Card className="h-full">
-            <CardHeader>
-              <CardTitle>Messages</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <div className="divide-y">
-                {emails.map((email) => (
-                  <button
+        <Card className="bg-white border-falcon-border-light lg:col-span-1">
+          <CardHeader className="pb-3">
+            <CardTitle className="font-poppins text-falcon-text-primary flex items-center justify-between">
+              <span>Emails ({filteredEmails.length})</span>
+              <Button variant="ghost" size="sm">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <ScrollArea className="h-96">
+              <div className="space-y-1 p-2">
+                {filteredEmails.map((email) => (
+                  <div
                     key={email.id}
-                    onClick={() => setSelectedEmail(email)}
                     className={cn(
-                      "w-full p-4 text-left hover:bg-gray-50 transition-colors",
-                      selectedEmail?.id === email.id &&
-                        "bg-blue-50 border-r-2 border-blue-600",
-                      !email.isRead && "font-medium bg-gray-50",
+                      "p-3 rounded-lg cursor-pointer transition-colors hover:bg-falcon-bg-light",
+                      selectedEmail?.id === email.id
+                        ? "bg-falcon-blue bg-opacity-10 border border-falcon-blue border-opacity-20"
+                        : "",
+                      !email.isRead ? "border-l-4 border-falcon-blue" : "",
                     )}
+                    onClick={() => setSelectedEmail(email)}
                   >
                     <div className="flex items-start gap-3">
-                      <Avatar className="h-8 w-8 mt-1">
+                      <Avatar className="w-8 h-8">
                         <AvatarImage
                           src={email.from.avatar}
                           alt={email.from.name}
                         />
-                        <AvatarFallback className="bg-gray-100 text-gray-600 text-xs">
+                        <AvatarFallback>
                           {email.from.name
                             .split(" ")
                             .map((n) => n[0])
@@ -213,49 +310,72 @@ export default function Email() {
                       </Avatar>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
-                          <p className="text-sm font-medium text-gray-900 truncate">
+                          <p
+                            className={cn(
+                              "text-sm font-poppins truncate",
+                              !email.isRead
+                                ? "font-semibold text-falcon-text-primary"
+                                : "text-falcon-text-secondary",
+                            )}
+                          >
                             {email.from.name}
                           </p>
                           <div className="flex items-center gap-1">
                             {email.isStarred && (
                               <Star className="h-3 w-3 text-yellow-400 fill-current" />
                             )}
-                            {email.hasAttachment && (
-                              <Paperclip className="h-3 w-3 text-gray-400" />
+                            {email.isFlagged && (
+                              <Flag className="h-3 w-3 text-red-500 fill-current" />
+                            )}
+                            {email.hasAttachments && (
+                              <Paperclip className="h-3 w-3 text-falcon-text-muted" />
                             )}
                           </div>
                         </div>
-                        <p className="text-sm text-gray-900 font-medium mb-1 truncate">
+                        <p
+                          className={cn(
+                            "text-sm font-poppins truncate mb-1",
+                            !email.isRead
+                              ? "font-medium text-falcon-text-primary"
+                              : "text-falcon-text-secondary",
+                          )}
+                        >
                           {email.subject}
                         </p>
-                        <p className="text-xs text-gray-500 truncate mb-2">
-                          {email.preview}
+                        <p className="text-xs text-falcon-text-muted font-poppins truncate mb-2">
+                          {email.body.substring(0, 60)}...
                         </p>
-                        <p className="text-xs text-gray-400">
-                          {formatTimestamp(email.timestamp)}
-                        </p>
+                        <div className="flex items-center justify-between">
+                          <Badge className={getCategoryColor(email.category)}>
+                            {email.category}
+                          </Badge>
+                          <div className="flex items-center gap-1 text-xs text-falcon-text-muted font-poppins">
+                            <Clock className="h-3 w-3" />
+                            {email.timestamp.split(" ")[1]}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </ScrollArea>
+          </CardContent>
+        </Card>
 
         {/* Email Content */}
-        <div className="col-span-5">
+        <Card className="bg-white border-falcon-border-light lg:col-span-2">
           {selectedEmail ? (
-            <Card className="h-full flex flex-col">
-              <CardHeader className="border-b">
-                <div className="flex items-start justify-between">
+            <div className="flex flex-col h-full">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10">
+                    <Avatar className="w-10 h-10">
                       <AvatarImage
                         src={selectedEmail.from.avatar}
                         alt={selectedEmail.from.name}
                       />
-                      <AvatarFallback className="bg-gray-100 text-gray-600">
+                      <AvatarFallback>
                         {selectedEmail.from.name
                           .split(" ")
                           .map((n) => n[0])
@@ -263,20 +383,29 @@ export default function Email() {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-semibold text-falcon-text-primary font-poppins">
                         {selectedEmail.from.name}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-falcon-text-muted font-poppins">
                         {selectedEmail.from.email}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        {formatTimestamp(selectedEmail.timestamp)}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <Button variant="ghost" size="sm">
-                      <Star className="h-4 w-4" />
+                      <Reply className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm">
+                      <Forward className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm">
+                      <Star
+                        className={cn(
+                          "h-4 w-4",
+                          selectedEmail.isStarred &&
+                            "text-yellow-400 fill-current",
+                        )}
+                      />
                     </Button>
                     <Button variant="ghost" size="sm">
                       <Archive className="h-4 w-4" />
@@ -284,60 +413,157 @@ export default function Email() {
                     <Button variant="ghost" size="sm">
                       <Trash2 className="h-4 w-4" />
                     </Button>
+                    <Button variant="ghost" size="sm">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
-                <div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                <div className="space-y-2">
+                  <h2 className="text-lg font-semibold text-falcon-text-primary font-poppins">
                     {selectedEmail.subject}
                   </h2>
-                </div>
-              </CardHeader>
-              <CardContent className="flex-1 p-6">
-                <div className="prose max-w-none">
-                  <div className="whitespace-pre-wrap text-gray-900">
-                    {selectedEmail.body}
-                  </div>
-                </div>
-                {selectedEmail.hasAttachment && (
-                  <div className="mt-6 pt-4 border-t">
-                    <p className="text-sm font-medium text-gray-900 mb-2">
-                      Attachments
-                    </p>
-                    <div className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
-                      <Paperclip className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-700">
-                        project-report.pdf
-                      </span>
-                      <Badge variant="outline" className="text-xs">
-                        2.4 MB
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-sm text-falcon-text-muted font-poppins">
+                      <span>To: {selectedEmail.to.join(", ")}</span>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {selectedEmail.timestamp}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {selectedEmail.hasAttachments && (
+                        <Badge variant="outline" className="text-xs">
+                          <Paperclip className="h-3 w-3 mr-1" />
+                          Attachments
+                        </Badge>
+                      )}
+                      <Badge
+                        className={getCategoryColor(selectedEmail.category)}
+                      >
+                        {selectedEmail.category}
                       </Badge>
                     </div>
                   </div>
-                )}
+                </div>
+              </CardHeader>
+              <Separator />
+              <CardContent className="flex-1 p-6">
+                <ScrollArea className="h-full">
+                  <div className="prose max-w-none text-falcon-text-primary font-poppins whitespace-pre-wrap">
+                    {selectedEmail.body}
+                  </div>
+                </ScrollArea>
               </CardContent>
-              <div className="border-t p-4">
+              <Separator />
+              <div className="p-4">
                 <div className="flex gap-2">
-                  <Button variant="outline" className="gap-2">
-                    <Reply className="h-4 w-4" />
+                  <Button className="bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90 font-poppins">
+                    <Reply className="h-4 w-4 mr-2" />
                     Reply
                   </Button>
-                  <Button variant="outline" className="gap-2">
-                    <Forward className="h-4 w-4" />
+                  <Button variant="outline" className="font-poppins">
+                    <Forward className="h-4 w-4 mr-2" />
                     Forward
+                  </Button>
+                  <Button variant="outline" className="font-poppins">
+                    <Print className="h-4 w-4 mr-2" />
+                    Print
                   </Button>
                 </div>
               </div>
-            </Card>
+            </div>
           ) : (
-            <Card className="h-full flex items-center justify-center">
+            <CardContent className="flex items-center justify-center h-full">
               <div className="text-center">
-                <Mail className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Select an email to read</p>
+                <Mail className="h-12 w-12 text-falcon-text-muted mx-auto mb-4" />
+                <p className="text-falcon-text-muted font-poppins">
+                  Select an email to read
+                </p>
               </div>
-            </Card>
+            </CardContent>
           )}
-        </div>
+        </Card>
       </div>
+
+      {/* Compose Modal would go here */}
+      {isComposing && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <Card className="w-full max-w-2xl max-h-[80vh] bg-white">
+            <CardHeader>
+              <CardTitle className="font-poppins text-falcon-text-primary">
+                Compose Email
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  To
+                </label>
+                <Input
+                  value={composeData.to}
+                  onChange={(e) =>
+                    setComposeData((prev) => ({ ...prev, to: e.target.value }))
+                  }
+                  placeholder="recipient@example.com"
+                  className="font-poppins"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  Subject
+                </label>
+                <Input
+                  value={composeData.subject}
+                  onChange={(e) =>
+                    setComposeData((prev) => ({
+                      ...prev,
+                      subject: e.target.value,
+                    }))
+                  }
+                  placeholder="Email subject"
+                  className="font-poppins"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-falcon-text-secondary font-poppins">
+                  Message
+                </label>
+                <Textarea
+                  value={composeData.body}
+                  onChange={(e) =>
+                    setComposeData((prev) => ({
+                      ...prev,
+                      body: e.target.value,
+                    }))
+                  }
+                  placeholder="Type your message here..."
+                  rows={10}
+                  className="font-poppins"
+                />
+              </div>
+              <div className="flex justify-between">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsComposing(false)}
+                  className="font-poppins"
+                >
+                  Cancel
+                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" className="font-poppins">
+                    <Paperclip className="h-4 w-4 mr-2" />
+                    Attach
+                  </Button>
+                  <Button className="bg-falcon-blue hover:bg-falcon-blue hover:bg-opacity-90 font-poppins">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
