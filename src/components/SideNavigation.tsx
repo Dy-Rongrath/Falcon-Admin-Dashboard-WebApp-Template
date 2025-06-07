@@ -44,7 +44,7 @@ const navigationItems: NavItem[] = [
     label: "Dashboard",
     children: [
       { icon: Home, label: "Default", path: "/" },
-      { icon: BarChart3, label: "Analytics", path: "/analytics" },
+      { icon: BarChart3, label: "Analytics", path: "/dashboard/analytics" },
       { icon: Users, label: "CRM", path: "/dashboard/crm" },
       { icon: ShoppingCart, label: "E commerce", path: "/ecommerce/products" },
       { icon: Package, label: "LMS", badge: "New", path: "/dashboard/lms" },
@@ -54,7 +54,7 @@ const navigationItems: NavItem[] = [
         icon: Bell,
         label: "Support desk",
         badge: "New",
-        path: "/support/tickets",
+        path: "/dashboard/support-desk",
       },
     ],
   },
