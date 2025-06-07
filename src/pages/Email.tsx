@@ -32,7 +32,7 @@ import {
   Clock,
   Flag,
   Download,
-  Print,
+  Printer,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -466,7 +466,7 @@ export default function Email() {
                     Forward
                   </Button>
                   <Button variant="outline" className="font-poppins">
-                    <Print className="h-4 w-4 mr-2" />
+                    <Printer className="h-4 w-4 mr-2" />
                     Print
                   </Button>
                 </div>
