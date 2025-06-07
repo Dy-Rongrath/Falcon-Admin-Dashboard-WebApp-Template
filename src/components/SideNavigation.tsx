@@ -80,7 +80,15 @@ const navigationItems: NavItem[] = [
   { icon: Zap, label: "Utilities", path: "/utilities" },
 ];
 
-export default function SideNavigation() {
+interface SideNavigationProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export default function SideNavigation({
+  isOpen = true,
+  onClose,
+}: SideNavigationProps) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
@@ -116,6 +124,10 @@ export default function SideNavigation() {
         toggleExpanded(item.label);
       } else if (item.path) {
         navigate(item.path);
+        // Close mobile sidebar when navigating
+        if (window.innerWidth < 1024 && onClose) {
+          onClose();
+        }
       }
     };
 
@@ -172,7 +184,12 @@ export default function SideNavigation() {
   };
 
   return (
-    <div className="fixed left-0 top-0 z-40 h-screen w-64 bg-white border-r border-falcon-border-light">
+    <div
+      className={cn(
+        "fixed left-0 top-0 z-50 h-screen w-64 bg-white border-r border-falcon-border-light transition-transform duration-300 ease-in-out",
+        isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+      )}
+    >
       <ScrollArea className="h-full">
         <div className="flex h-full max-h-screen flex-col gap-2">
           {/* Logo */}
