@@ -307,19 +307,19 @@ export default function Components() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-4">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg" alt="Avatar" />
+                    <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="Avatar" />
                     <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src="/placeholder.svg" alt="Avatar" />
+                    <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="Avatar" />
                     <AvatarFallback>SM</AvatarFallback>
                   </Avatar>
                   <Avatar className="h-12 w-12">
-                    <AvatarImage src="/placeholder.svg" alt="Avatar" />
+                    <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="Avatar" />
                     <AvatarFallback>MJ</AvatarFallback>
                   </Avatar>
                   <Avatar className="h-16 w-16">
-                    <AvatarImage src="/placeholder.svg" alt="Avatar" />
+                    <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="Avatar" />
                     <AvatarFallback>SW</AvatarFallback>
                   </Avatar>
                 </div>

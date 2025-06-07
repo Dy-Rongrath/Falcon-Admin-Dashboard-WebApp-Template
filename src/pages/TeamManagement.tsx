@@ -668,7 +668,7 @@ export default function TeamManagement() {
                   <div className="inline-block p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
                     <div className="flex items-center gap-3">
                       <Avatar className="h-12 w-12">
-                        <AvatarImage src="/placeholder.svg" alt="CEO" />
+                        <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="CEO" />
                         <AvatarFallback className="bg-blue-100 text-blue-600">
                           CEO
                         </AvatarFallback>
@@ -695,7 +695,7 @@ export default function TeamManagement() {
                           <div className="flex justify-center">
                             <Avatar className="h-10 w-10">
                               <AvatarImage
-                                src="/placeholder.svg"
+                                src={`${import.meta.env.BASE_URL}placeholder.svg`}
                                 alt={team.lead}
                               />
                               <AvatarFallback className="bg-gray-100 text-gray-600">

@@ -59,7 +59,7 @@ export default function Settings() {
               {/* Profile Picture */}
               <div className="flex items-center gap-4">
                 <Avatar className="h-20 w-20">
-                  <AvatarImage src="/placeholder.svg" alt="Profile" />
+                  <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="Profile" />
                   <AvatarFallback className="bg-gray-100 text-gray-600 text-lg">
                     JD
                   </AvatarFallback>

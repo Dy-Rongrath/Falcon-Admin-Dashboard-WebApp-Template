@@ -98,7 +98,7 @@ export default function Profile() {
               <div className="flex items-start gap-6">
                 <div className="relative">
                   <Avatar className="h-24 w-24">
-                    <AvatarImage src="/placeholder.svg" alt="Profile" />
+                    <AvatarImage src={`${import.meta.env.BASE_URL}placeholder.svg`} alt="Profile" />
                     <AvatarFallback className="bg-blue-100 text-blue-600 text-2xl">
                       JD
                     </AvatarFallback>
