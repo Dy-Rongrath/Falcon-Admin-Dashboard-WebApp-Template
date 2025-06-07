@@ -83,6 +83,17 @@ const Calendar: React.FC = () => {
     },
   ];
 
+  // Next month events (for July preview)
+  const nextMonthEvents = [
+    {
+      id: 9,
+      title: "Birthday Party",
+      date: 5,
+      color: "bg-blue-500",
+      textColor: "text-white",
+    },
+  ];
+
   // Generate calendar days
   const generateCalendarDays = () => {
     const year = currentDate.getFullYear();
@@ -115,7 +126,10 @@ const Calendar: React.FC = () => {
     setCurrentDate(new Date());
   };
 
-  const getEventsForDay = (date: number) => {
+  const getEventsForDay = (date: number, isNextMonth = false) => {
+    if (isNextMonth) {
+      return nextMonthEvents.filter((event) => event.date === date);
+    }
     return events.filter((event) => event.date === date);
   };
 
@@ -188,12 +202,22 @@ const Calendar: React.FC = () => {
         <div className="grid grid-cols-7 gap-px bg-gray-200 rounded-lg overflow-hidden">
           {calendarDays.map((day, index) => {
             const dayNumber = day.getDate();
-            const dayEvents = getEventsForDay(dayNumber);
             const isCurrentMonthDay = isCurrentMonth(day);
             const isTodayDay = isToday(day);
             const isNextMonth =
               day.getMonth() > currentDate.getMonth() ||
               (day.getMonth() === 0 && currentDate.getMonth() === 11);
+            const isPrevMonth =
+              day.getMonth() < currentDate.getMonth() ||
+              (day.getMonth() === 11 && currentDate.getMonth() === 0);
+
+            // Get events for this day
+            let dayEvents = [];
+            if (isCurrentMonthDay) {
+              dayEvents = getEventsForDay(dayNumber, false);
+            } else if (isNextMonth) {
+              dayEvents = getEventsForDay(dayNumber, true);
+            }
 
             return (
               <div
@@ -222,7 +246,9 @@ const Calendar: React.FC = () => {
                     {dayEvents.slice(0, 3).map((event, eventIndex) => (
                       <div
                         key={event.id}
-                        className={`${event.color} ${event.textColor} px-2 py-1 rounded text-xs font-medium cursor-pointer hover:opacity-90 transition-opacity`}
+                        className={`${event.color} ${event.textColor} px-2 py-1 rounded text-xs font-medium cursor-pointer hover:opacity-90 transition-opacity ${
+                          !isCurrentMonthDay ? "opacity-60" : ""
+                        }`}
                         title={event.title}
                       >
                         <div className="truncate">
@@ -234,17 +260,17 @@ const Calendar: React.FC = () => {
                       </div>
                     ))}
 
-                    {/* More events indicator */}
-                    {dayEvents.length > 3 && (
-                      <div className="text-xs text-gray-500 text-center py-1">
-                        +{dayEvents.length - 3} more
-                      </div>
-                    )}
-
-                    {/* Special case for day 7 (today) with 4+ more indicator */}
+                    {/* More events indicator for day 7 (today) */}
                     {dayNumber === 7 && isTodayDay && (
                       <div className="text-xs text-gray-500 text-center py-1">
                         +4 more
+                      </div>
+                    )}
+
+                    {/* General more events indicator */}
+                    {dayEvents.length > 3 && dayNumber !== 7 && (
+                      <div className="text-xs text-gray-500 text-center py-1">
+                        +{dayEvents.length - 3} more
                       </div>
                     )}
                   </div>
@@ -252,11 +278,6 @@ const Calendar: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Next month preview days with events */}
-        <div className="mt-4 text-xs text-gray-500">
-          {/* Add next month events here if needed */}
         </div>
       </div>
     </div>
